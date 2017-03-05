@@ -1,0 +1,45 @@
+{% extends "sil5VitrineBundle::layout.html.twig" %}
+
+{% block title %} Catalogue {% endblock %}
+
+{% block content %}
+
+  <div id="headerwrap">
+    <div class="container">
+      <div class="row centered">
+        <div class="col-lg-8 col-lg-offset-2">
+
+        <h1> Catalogue </h1>
+        </div>
+      </div><!-- row -->
+    </div><!-- container -->
+  </div><!-- headerwrap -->
+
+
+	<!-- CATALOGUE SECTION -->
+	<div id="dg">
+		<div class="container">
+			<div class="row centered">
+				<br>
+				<div class="col-lg-4">
+					<div class="tilt">
+					     <a href="#"><img src="{{ asset('bundles/sil5vitrine/pictures/lampes/img_01_2.jpg')}}" alt="kanur"></a>
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="tilt">
+					     <a href="#"><img src="assets/img/p03.png" alt=""></a>
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="tilt">
+					     <a href="#"><img src="assets/img/p02.png" alt=""></a>
+					</div>
+				</div>
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- DG -->
+
+{% endblock %}
