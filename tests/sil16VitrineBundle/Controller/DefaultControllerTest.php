@@ -1,6 +1,6 @@
 <?php
 
-namespace sil5\VitrineBundle\Tests\Controller;
+namespace sil16\VitrineBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

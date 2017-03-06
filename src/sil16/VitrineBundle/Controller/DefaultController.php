@@ -1,6 +1,6 @@
 <?php
 
-namespace sil5\VitrineBundle\Controller;
+namespace sil16\VitrineBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -8,12 +8,12 @@ class DefaultController extends Controller
 {
     public function indexAction($name)
     {
-        return $this->render('sil5VitrineBundle:Default:index.html.twig', array('name' => $name));
+        return $this->render('sil16VitrineBundle:Default:index.html.twig', array('name' => $name));
     }
 
     public function mentionsAction()
     {
-        return $this->render('sil5VitrineBundle:Default:mentions.html.twig');
+        return $this->render('sil16VitrineBundle:Default:mentions.html.twig');
     }
 
     public function catalogueAction()
@@ -41,7 +41,7 @@ class DefaultController extends Controller
                  39.99)
                );
 
-        return $this->render('sil5VitrineBundle:Default:catalogue.html.twig', array('lamps' => $lamps));
+        return $this->render('sil16VitrineBundle:Default:catalogue.html.twig', array('lamps' => $lamps));
     }
 }
 

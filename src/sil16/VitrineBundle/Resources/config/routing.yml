@@ -1,0 +1,11 @@
+sil16_vitrine_accueil:
+    path:     /accueil/{name}
+    defaults: { _controller: sil16VitrineBundle:Default:index, name: "visiteur" }
+
+sil16_vitrine_mentions:
+    path:     /mentions-legales
+    defaults: { _controller: sil16VitrineBundle:Default:mentions }
+
+sil16_vitrine_catalogue:
+    path:     /catalogue
+    defaults: { _controller: sil16VitrineBundle:Default:catalogue }
