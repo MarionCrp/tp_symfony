@@ -21,13 +21,13 @@
 		<div class="container">
       <div class="row centered">
         <br>
-      {% for lamp in lamps %}
+      {% for product in products %}
 
   				<div class="col-lg-3">
   					<div class="tilt">
-  					     <a href="#"><img src="{{ asset('bundles/sil16vitrine/pictures/lampes/'~ lamp.picture()) }}" alt="kanur" width=300></a>
-                 <h2> {{ lamp.name() }} </h2>
-                 <div class="price">{{ lamp.price_to_s() }} </div>
+  					     <a href="#"><img src="{{ asset('bundles/sil16vitrine/pictures/productes/'~ product.picture()) }}" alt="kanur" width=300></a>
+                 <h2> {{ product.name() }} </h2>
+                 <div class="price">{{ product.price_to_s() }} </div>
   					</div>
   				</div>
         {% endfor %}

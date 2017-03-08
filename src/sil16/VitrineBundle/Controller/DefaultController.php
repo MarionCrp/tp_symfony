@@ -18,34 +18,34 @@ class DefaultController extends Controller
 
     public function catalogueAction()
     {
-      $lamps = array(
-        new Lamp("Kanur",
+      $products = array(
+        new Product("Kanur",
                  "img_01_2.jpg",
-                 "Pour un dépaysement garanti, invitez les lumières chaudes de l'Orient dans votre intérieur avec cette belle lampe à poser.",
+                 "Pour un dépaysement garanti, invitez les lumières chaudes de l'Orient dans votre intérieur avec cette belle producte à poser.",
                  59.90),
-        new Lamp("Mahara",
+        new Product("Mahara",
                  "img_02_2.jpg",
-                 "Forme originale et look tendance pour cette lampe avec abat-jour tout en noir et au coloris argenté.",
+                 "Forme originale et look tendance pour cette producte avec abat-jour tout en noir et au coloris argenté.",
                  99.90),
-        new Lamp("Sewal",
+        new Product("Sewal",
                  "img_03_2.jpg",
-                 "Une très belle lampe à poser qui trouve son originalité dans ses 3 points lumineux et abats-jour de coloris différents, ainsi qu'avec son pied en acier brossé !",
+                 "Une très belle producte à poser qui trouve son originalité dans ses 3 points lumineux et abats-jour de coloris différents, ainsi qu'avec son pied en acier brossé !",
                  49.99),
-        new Lamp("Mahara",
+        new Product("Mahara",
                  "img_04_2.jpg",
-                 "Forme originale et look tendance pour cette lampe avec abat-jour tout en chrome coloris argenté.",
+                 "Forme originale et look tendance pour cette producte avec abat-jour tout en chrome coloris argenté.",
                  99.90),
-        new Lamp("Mulshi",
+        new Product("Mulshi",
                  "img_05_2.jpg",
-                 "Forme originale et look tendance pour cette lampe avec abat-jour tout en noir et au coloris chromé.",
+                 "Forme originale et look tendance pour cette producte avec abat-jour tout en noir et au coloris chromé.",
                  39.99)
                );
 
-        return $this->render('sil16VitrineBundle:Default:catalogue.html.twig', array('lamps' => $lamps));
+        return $this->render('sil16VitrineBundle:Default:catalogue.html.twig', array('products' => $products));
     }
 }
 
-class Lamp {
+class Product {
   private $name;
   private $picture;
   private $description;
