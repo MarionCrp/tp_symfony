@@ -20,3 +20,10 @@ sil16\VitrineBundle\Entity\Picture:
       joinColumn:
         name: product_id
         referencedColumnName: id
+
+    picture_category:
+      targetEntity: PictureCategory
+      inversedBy: pictures
+      joinColumn:
+        name: picture_category_id
+        referencedColumnName: id

@@ -33,7 +33,7 @@ class Product
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -56,7 +56,7 @@ class Product
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -79,7 +79,7 @@ class Product
     /**
      * Get price
      *
-     * @return string 
+     * @return string
      */
     public function getPrice()
     {
@@ -102,7 +102,7 @@ class Product
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -135,7 +135,7 @@ class Product
     /**
      * Get manyToOne
      *
-     * @return string 
+     * @return string
      */
     public function getManyToOne()
     {
@@ -158,7 +158,7 @@ class Product
     /**
      * Get oneToMany
      *
-     * @return string 
+     * @return string
      */
     public function getOneToMany()
     {
@@ -208,7 +208,7 @@ class Product
     /**
      * Get pictures
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPictures()
     {
@@ -231,10 +231,42 @@ class Product
     /**
      * Get category
      *
-     * @return \sil16\VitrineBundle\Entity\Category 
+     * @return \sil16\VitrineBundle\Entity\Category
      */
     public function getCategory()
     {
         return $this->category;
+    }
+
+    public function price_to_s(){
+      return number_format($this->price, 2, '€', '');
+    }
+    /**
+     * @var integer
+     */
+    private $stock;
+
+
+    /**
+     * Set stock
+     *
+     * @param integer $stock
+     * @return Product
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
+     * @return integer 
+     */
+    public function getStock()
+    {
+        return $this->stock;
     }
 }

@@ -108,4 +108,32 @@ class Picture
     {
         return $this->product;
     }
+    /**
+     * @var \sil16\VitrineBundle\Entity\PictureCategory
+     */
+    private $picture_category;
+
+
+    /**
+     * Set picture_category
+     *
+     * @param \sil16\VitrineBundle\Entity\PictureCategory $pictureCategory
+     * @return Picture
+     */
+    public function setPictureCategory(\sil16\VitrineBundle\Entity\PictureCategory $pictureCategory = null)
+    {
+        $this->picture_category = $pictureCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get picture_category
+     *
+     * @return \sil16\VitrineBundle\Entity\PictureCategory 
+     */
+    public function getPictureCategory()
+    {
+        return $this->picture_category;
+    }
 }

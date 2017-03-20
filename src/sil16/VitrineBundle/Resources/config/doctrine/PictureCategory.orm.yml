@@ -1,0 +1,17 @@
+sil16\VitrineBundle\Entity\PictureCategory:
+  type: entity
+  table: picture_category
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+
+  fields:
+    name:
+      type: string
+      length: 100
+
+  oneToMany:
+    pictures:
+      targetEntity: Picture
+      mappedBy: picture_category

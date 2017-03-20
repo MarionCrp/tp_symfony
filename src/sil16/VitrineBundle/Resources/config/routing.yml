@@ -9,3 +9,7 @@ sil16_vitrine_mentions:
 sil16_vitrine_catalogue:
     path:     /catalogue
     defaults: { _controller: sil16VitrineBundle:Default:catalogue }
+
+sil16_vitrine_articles_par_categorie:
+    path:     /catalogue/{category_id}
+    defaults: { _controller: sil16VitrineBundle:Default:articlesParCategorie, category_id: "1" }

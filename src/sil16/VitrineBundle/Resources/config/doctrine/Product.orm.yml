@@ -15,6 +15,8 @@ sil16\VitrineBundle\Entity\Product:
       scale: 2
     description:
       type: text
+    stock:
+      type: integer
 
   manyToOne:
     category:
