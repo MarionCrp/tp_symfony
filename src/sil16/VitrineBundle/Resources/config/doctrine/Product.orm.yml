@@ -19,11 +19,11 @@ sil16\VitrineBundle\Entity\Product:
       type: integer
 
   manyToOne:
-    category:
-      targetEntity: Category
+    product_category:
+      targetEntity: ProductCategory
       inversedBy: products
       joinColumn:
-        name: category_id
+        name: product_category_id
         referencedColumnName: id
   oneToMany:
     pictures:

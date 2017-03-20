@@ -269,4 +269,32 @@ class Product
     {
         return $this->stock;
     }
+    /**
+     * @var \sil16\VitrineBundle\Entity\ProductCategory
+     */
+    private $product_category;
+
+
+    /**
+     * Set product_category
+     *
+     * @param \sil16\VitrineBundle\Entity\ProductCategory $productCategory
+     * @return Product
+     */
+    public function setProductCategory(\sil16\VitrineBundle\Entity\ProductCategory $productCategory = null)
+    {
+        $this->product_category = $productCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get product_category
+     *
+     * @return \sil16\VitrineBundle\Entity\ProductCategory 
+     */
+    public function getProductCategory()
+    {
+        return $this->product_category;
+    }
 }

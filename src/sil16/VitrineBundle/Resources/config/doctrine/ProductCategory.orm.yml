@@ -1,6 +1,6 @@
-sil16\VitrineBundle\Entity\Category:
+sil16\VitrineBundle\Entity\ProductCategory:
   type: entity
-  table: category
+  table: product_category
   id:
     id:
       type: integer
@@ -14,4 +14,4 @@ sil16\VitrineBundle\Entity\Category:
   oneToMany:
     products:
       targetEntity: Product
-      mappedBy: category
+      mappedBy: product_category

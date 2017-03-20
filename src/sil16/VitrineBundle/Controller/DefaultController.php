@@ -19,16 +19,16 @@ class DefaultController extends Controller
     public function catalogueAction()
     {
       $em = $this->getDoctrine()->getManager();
-      $categories = $em->getRepository('sil16VitrineBundle:Category')->findAll();
-      return $this->render('sil16VitrineBundle:Default:catalogue.html.twig', array('categories' => $categories));
+      $product_categories = $em->getRepository('sil16VitrineBundle:ProductCategory')->findAll();
+      return $this->render('sil16VitrineBundle:Default:catalogue.html.twig', array('product_categories' => $product_categories));
     }
 
-    public function articlesParCategorieAction($category_id)
+    public function productsByCategoryAction($product_category_id)
     {
       $em = $this->getDoctrine()->getManager();
-      $category = $em->getRepository('sil16VitrineBundle:Category')->find($category_id);
+      $category = $em->getRepository('sil16VitrineBundle:ProductCategory')->find($product_category_id);
       $products = $category->getProducts();
 
-      return $this->render('sil16VitrineBundle:Default:articlesParCategorie.html.twig', array('products' => $products, 'category' => $category));
+      return $this->render('sil16VitrineBundle:Default:products_by_category.html.twig', array('products' => $products, 'product_category' => $category));
     }
 }

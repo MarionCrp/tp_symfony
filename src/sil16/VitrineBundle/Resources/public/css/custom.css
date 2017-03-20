@@ -6,3 +6,11 @@
   font-size: 1.2em;
   color: #333;
 }
+
+.glyphicon-shopping-cart {
+  color: #9d9d9d;
+}
+
+.glyphicon-shopping-cart:hover {
+  color: white;
+}

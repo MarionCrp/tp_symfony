@@ -1,0 +1,29 @@
+sil16\VitrineBundle\Entity\OrderLine:
+  type: entity
+  table: order_line
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+
+  fields:
+    quantity:
+      type: integer
+    unit_price:
+      type: decimal
+      scale: 2
+
+  manyToOne:
+    product:
+      targetEntity: Product
+      inversedBy: order_lines
+      joinColum:
+        name: product_id
+        referencedColumnName: id
+
+    order:
+      targetEntity: Order
+      inversedBy: order_lines
+      joinColum:
+        name: order_id
+        referencedColumnName: id

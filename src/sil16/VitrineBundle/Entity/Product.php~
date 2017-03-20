@@ -241,4 +241,32 @@ class Product
     public function price_to_s(){
       return number_format($this->price, 2, '€', '');
     }
+    /**
+     * @var integer
+     */
+    private $stock;
+
+
+    /**
+     * Set stock
+     *
+     * @param integer $stock
+     * @return Product
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
+     * @return integer 
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
 }

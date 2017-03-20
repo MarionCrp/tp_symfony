@@ -1,0 +1,19 @@
+sil16\VitrineBundle\Entity\Order:
+  type: entity
+  table: order
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+
+  manyToOne:
+    customer:
+      targetEntity: Customer
+      inversedBy: orders
+      joinColumn:
+        name: customer_id
+        referencedColumnName: id
+  oneToMany:
+    order_lines:
+      targetEntity: OrderLine
+      mappedBy: order

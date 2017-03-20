@@ -5,9 +5,9 @@ namespace sil16\VitrineBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * ProductCategory
  */
-class Category
+class ProductCategory
 {
     /**
      * @var integer
@@ -19,6 +19,18 @@ class Category
      */
     private $name;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $products;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -34,7 +46,7 @@ class Category
      * Set name
      *
      * @param string $name
-     * @return Category
+     * @return ProductCategory
      */
     public function setName($name)
     {
@@ -52,24 +64,12 @@ class Category
     {
         return $this->name;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $products;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add products
      *
      * @param \sil16\VitrineBundle\Entity\Product $products
-     * @return Category
+     * @return ProductCategory
      */
     public function addProduct(\sil16\VitrineBundle\Entity\Product $products)
     {

@@ -1,3 +1,4 @@
+# STATIC PAGES
 sil16_vitrine_accueil:
     path:     /accueil/{name}
     defaults: { _controller: sil16VitrineBundle:Default:index, name: "visiteur" }
@@ -6,10 +7,18 @@ sil16_vitrine_mentions:
     path:     /mentions-legales
     defaults: { _controller: sil16VitrineBundle:Default:mentions }
 
+### CATALOGUE ##################################################################
+# CATEGORIES
 sil16_vitrine_catalogue:
     path:     /catalogue
     defaults: { _controller: sil16VitrineBundle:Default:catalogue }
 
+# PRODUCTS
 sil16_vitrine_articles_par_categorie:
-    path:     /catalogue/{category_id}
-    defaults: { _controller: sil16VitrineBundle:Default:articlesParCategorie, category_id: "1" }
+    path:     /catalogue/{product_category_id}
+    defaults: { _controller: sil16VitrineBundle:Default:productsByCategory, product_category_id: "1" }
+
+# BASKET
+sil16_vitrine_basket_index:
+    path:     /mon-panier
+    defaults: { _controller: sil16VitrineBundle:Basket:index }
