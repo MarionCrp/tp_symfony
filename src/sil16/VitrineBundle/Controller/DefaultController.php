@@ -15,20 +15,4 @@ class DefaultController extends Controller
     {
         return $this->render('sil16VitrineBundle:Default:mentions.html.twig');
     }
-
-    public function catalogueAction()
-    {
-      $em = $this->getDoctrine()->getManager();
-      $product_categories = $em->getRepository('sil16VitrineBundle:ProductCategory')->findAll();
-      return $this->render('sil16VitrineBundle:Default:catalogue.html.twig', array('product_categories' => $product_categories));
-    }
-
-    public function productsByCategoryAction($product_category_id)
-    {
-      $em = $this->getDoctrine()->getManager();
-      $category = $em->getRepository('sil16VitrineBundle:ProductCategory')->find($product_category_id);
-      $products = $category->getProducts();
-
-      return $this->render('sil16VitrineBundle:Default:products_by_category.html.twig', array('products' => $products, 'product_category' => $category));
-    }
 }

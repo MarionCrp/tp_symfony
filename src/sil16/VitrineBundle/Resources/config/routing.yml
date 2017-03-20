@@ -11,12 +11,12 @@ sil16_vitrine_mentions:
 # CATEGORIES
 sil16_vitrine_catalogue:
     path:     /catalogue
-    defaults: { _controller: sil16VitrineBundle:Default:catalogue }
+    defaults: { _controller: sil16VitrineBundle:ProductCategory:index }
 
 # PRODUCTS
 sil16_vitrine_articles_par_categorie:
     path:     /catalogue/{product_category_id}
-    defaults: { _controller: sil16VitrineBundle:Default:productsByCategory, product_category_id: "1" }
+    defaults: { _controller: sil16VitrineBundle:Product:index, product_category_id: "1" }
 
 # BASKET
 sil16_vitrine_basket_index:
