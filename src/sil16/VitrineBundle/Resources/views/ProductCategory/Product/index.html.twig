@@ -30,6 +30,21 @@
                  <p>
                  {% if(product.stock() > 0) %}
                     En stock : {{ product.stock() }}
+                    {{ form_start(forms[product.id()], {'attr': {'class': 'form-horizontal'}}) }}
+                         {{ form_errors(forms[product.id()]) }}
+                         <div class="form-group">
+                           {{ form_label(forms[product.id()].quantity, "Quantité", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                           {{ form_errors(forms[product.id()].quantity) }}
+                           <div class="col-sm-4">
+                             {{ form_widget(forms[product.id()].quantity, {'attr': {'class': 'form-control'}}) }}
+                           </div>
+                         </div>
+                       {{ form_widget(forms[product.id()].product_id, {'attr': {'value': product.id()}}) }}
+                       {{ form_widget(forms[product.id()].submit, {'attr': {'class': 'btn btn-primary'}}) }}
+
+                       {{ form_rest(forms[product.id()]) }}
+
+                    {{ form_end(forms[product.id()]) }}
                  {% else %}
                     Rupture de stock
                  {% endif %}

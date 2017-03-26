@@ -14,3 +14,7 @@
 .glyphicon-shopping-cart:hover {
   color: white;
 }
+
+th, td {
+  text-align: center;
+}

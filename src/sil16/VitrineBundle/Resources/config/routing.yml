@@ -22,3 +22,6 @@ sil16_vitrine_articles_par_categorie:
 sil16_vitrine_basket_index:
     path:     /mon-panier
     defaults: { _controller: sil16VitrineBundle:Basket:index }
+sil16_vitrine_basket_add_product:
+    path:     /mon-panier/add_product
+    defaults: { _controller: sil16VitrineBundle:Basket:addProduct }

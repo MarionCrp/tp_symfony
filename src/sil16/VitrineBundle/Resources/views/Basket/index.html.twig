@@ -8,10 +8,42 @@
     <div class="container">
       <div class="row centered">
         <div class="col-lg-8 col-lg-offset-2">
-          <p> Bienvenue dans mon panier ! </p>
+          <h1>Mon panier</h1>
+
         </div>
       </div><!-- row -->
     </div><!-- container -->
   </div><!-- headerwrap -->
-
+  <div id="dg">
+    <div class="container">
+      <div class="row centered">
+        <br>
+        {% if(products) %}
+           <h2>Contenu de votre panier</h2>
+           <table class="table table-hover">
+              <thead>
+                 <tr>
+                    <th>Produit</th>
+                    <th>Catégorie</th>
+                    <th>Quantité</th>
+                    <th>Prix total</th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for item in products %}
+              <tr>
+                <td>{{ item['product'].name }}</td>
+                <td>{{ item['product'].getProductCategory.name }}</td>
+                <td>{{ item['qty'] }}</td>
+                <td>{{ item['product'].price * item['qty'] }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+           <h2>Votre panier est vide : Faites des courses !</h2>
+        {% endif %}
+      </div><!-- row -->
+    </div><!-- container -->
+  </div><!-- DG -->
 {% endblock %}

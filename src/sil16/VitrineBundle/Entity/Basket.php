@@ -1,27 +1,30 @@
 <?php
 
-namespace VotreNom\VitrineBundle\Entity;
+namespace sil16\VitrineBundle\Entity;
 
 /**
  * Basket
  */
 
-class Panier {
+class Basket {
 
   private $content;
   //Tableau - contenu[i] = quantite d'article d’id=i dans le panier)
 
   public function __construct() {
-  // initialise le contenu
+     $content = [];
   }
 
   public function getContent() {
-  // getter
+     return $this->content;
   }
 
-  public function addProduct ($productId, $qte = 1) {
-  // ajoute l'article $articleId au contenu, en quantité $qte
-  // (vérifier si l'article n'y est pas déjà)
+  public function addProduct ($product_id, $qty = 1) {
+    if(array_key_exists($product_id, $this->getContent())){
+      $this->content[$product_id] += $qty;
+    } else {
+      $this->content[$product_id] = $qty;
+    }
   }
 
   public function deleteProduct($productId) {
@@ -30,3 +33,5 @@ class Panier {
 
   public function clear() {
   // vide le contenu
+  }
+}

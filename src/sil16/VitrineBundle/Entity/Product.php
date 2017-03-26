@@ -169,10 +169,6 @@ class Product
      */
     private $pictures;
 
-    /**
-     * @var \sil16\VitrineBundle\Entity\Category
-     */
-    private $category;
 
     /**
      * Constructor
@@ -215,29 +211,6 @@ class Product
         return $this->pictures;
     }
 
-    /**
-     * Set category
-     *
-     * @param \sil16\VitrineBundle\Entity\Category $category
-     * @return Product
-     */
-    public function setCategory(\sil16\VitrineBundle\Entity\Category $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return \sil16\VitrineBundle\Entity\Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
     public function price_to_s(){
       return number_format($this->price, 2, '€', '');
     }
@@ -263,7 +236,7 @@ class Product
     /**
      * Get stock
      *
-     * @return integer 
+     * @return integer
      */
     public function getStock()
     {
@@ -291,7 +264,7 @@ class Product
     /**
      * Get product_category
      *
-     * @return \sil16\VitrineBundle\Entity\ProductCategory 
+     * @return \sil16\VitrineBundle\Entity\ProductCategory
      */
     public function getProductCategory()
     {
