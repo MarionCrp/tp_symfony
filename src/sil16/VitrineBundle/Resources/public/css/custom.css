@@ -18,3 +18,12 @@
 th, td {
   text-align: center;
 }
+
+#flash {
+	position: fixed;
+    z-index: 1500;
+    top: 30px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}

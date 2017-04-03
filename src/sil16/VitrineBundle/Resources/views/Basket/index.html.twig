@@ -37,11 +37,16 @@
                 <td><a href="{{ path('sil16_vitrine_articles_par_categorie', { product_category_id: item['product'].getProductCategory.getId() } ) }}">{{ item['product'].getProductCategory.name }}</a></td>
                 <td>{{ item['qty']  }}</td>
                 <td>{{ item['product'].price * item['qty'] }}</td>
-                <td><a href="{{ path('sil16_vitrine_basket_delete_product', { product_id: item['product'].getId() }) }}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+                <td>
+                  <a href="{{ path('sil16_vitrine_basket_delete_product', { product_id: item['product'].getId() }) }}" onclick="return confirm('Voulez-vous supprimer ce produit')">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                  </a>
+              </td>
               </tr>
             {% endfor %}
             </tbody>
           </table>
+          <a href="{{ path('sil16_vitrine_basket_clear') }}" class="btn btn-primary" onclick="return confirm('Voulez-vous vraiment vider votre panier ?')">Vider le panier</a>
         {% else %}
            <h2>Votre panier est vide : Faites des courses !</h2>
         {% endif %}

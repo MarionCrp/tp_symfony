@@ -23,11 +23,20 @@
 
   <body>
     {% include "sil16VitrineBundle::header.html.twig" %}
+    {% for type, flash_messages in app.session.flashbag %}
+      {% for flashMessage in flash_messages %}
+          <div id="flash" style="display: display;">
+            <span class="alert alert-{{ type }}">  {{ flashMessage }} </span>
+          </div>
+      {% endfor %}
+    {% endfor %}
+
 
     {% block content endblock %}
 
     {% include "sil16VitrineBundle::footer.html.twig" %}
     <script src="{{ asset('bundles/sil16vitrine/js/jquery-3.1.1.min.js') }}"></script>
-    <script src={{ asset('bundles/sil16vitrine/js/bootstrap.js') }}></script>
+    <script src="{{ asset('bundles/sil16vitrine/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('bundles/sil16vitrine/js/flash.js') }}"></script>
   </body>
 </html>

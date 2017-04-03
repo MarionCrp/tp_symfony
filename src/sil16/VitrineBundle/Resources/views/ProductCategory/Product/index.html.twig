@@ -40,7 +40,7 @@
                            </div>
                          </div>
                        {{ form_widget(forms[product.id()].product_id, {'attr': {'value': product.id()}}) }}
-                       {{ form_widget(forms[product.id()].submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                       {{ form_widget(forms[product.id()].submit, {'attr': {'class': 'btn btn-primary'}, 'label': "Ajouter" }) }}
 
                        {{ form_rest(forms[product.id()]) }}
 

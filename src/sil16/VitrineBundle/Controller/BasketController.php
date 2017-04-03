@@ -43,29 +43,43 @@ class BasketController extends Controller
         $quantity = $params['quantity'];
 
         $product = $this->findProduct($product_id);
-
-        $basket = $session->get('basket', new Basket());
-
-        $basket->addProduct($product_id, $quantity);
-
-        $session->set('basket', $basket);
-
-        return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
+        if($product){
+          $basket = $session->get('basket', new Basket());
+          $basket->addProduct($product_id, $quantity);
+          $session->set('basket', $basket);
+          $this->addFlash('success', "Le produit a été ajouté avec succès !");
+          return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
+        } else {
+          $this->addFlash('danger', "Le produit ajouté n'existe pas");
+          return $this->redirect($this->generateUrl('sil16_vitrine_catalogue'));
+        }
     }
 
     public function deleteProductAction($product_id){
         $session = $this->getRequest()->getSession();
-
         $product = $this->findProduct($product_id);
 
+        if($product){
+          # Récupère un panier déjà présent en session OU en créé un.
+          $basket = $session->get('basket', new Basket());
+          $basket->deleteProduct($product_id);
+          $session->set('basket', $basket);
+          $this->addFlash('success', "Le produit a bien été supprimé!");
+          return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
+        } else {
+          $this->addFlash('danger', "Erreur lors de la suppression du produit");
+          return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
+        }
+    }
+
+    public function clearAction(){
+        $session = $this->getRequest()->getSession();
         # Récupère un panier déjà présent en session OU en créé un.
         $basket = $session->get('basket', new Basket());
-
-        $basket->deleteProduct($product_id);
-
+        $basket->clear();
         $session->set('basket', $basket);
-
-        return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
+        $this->addFlash('success', "Votre panier a été vidé");
+        return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
     }
 
     private function findProduct($product_id){

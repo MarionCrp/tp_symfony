@@ -18,6 +18,9 @@ class Basket {
   public function getContent() {
      return $this->content;
   }
+  public function setContent($content) {
+     $this->content = $content;
+  }
 
   public function addProduct ($product_id, $qty = 1) {
     if(array_key_exists($product_id, $this->getContent())){
@@ -34,6 +37,6 @@ class Basket {
   }
 
   public function clear() {
-  // vide le contenu
+    $this->setContent([]);
   }
 }
