@@ -25,3 +25,6 @@ sil16_vitrine_basket_index:
 sil16_vitrine_basket_add_product:
     path:     /mon-panier/add_product
     defaults: { _controller: sil16VitrineBundle:Basket:addProduct }
+sil16_vitrine_basket_delete_product:
+    path:     /mon-panier/delete_product/{product_id}
+    defaults: { _controller: sil16VitrineBundle:Basket:deleteProduct }

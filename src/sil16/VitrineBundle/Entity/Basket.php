@@ -8,7 +8,7 @@ namespace sil16\VitrineBundle\Entity;
 
 class Basket {
 
-  private $content;
+  private $content = [];
   //Tableau - contenu[i] = quantite d'article d’id=i dans le panier)
 
   public function __construct() {
@@ -28,7 +28,9 @@ class Basket {
   }
 
   public function deleteProduct($productId) {
-  // supprimer l'article $articleId du contenu
+    if(array_key_exists((int) $productId, $this->getContent())){
+      unset($this->content[$productId]);
+    }
   }
 
   public function clear() {

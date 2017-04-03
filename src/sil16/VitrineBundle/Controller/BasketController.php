@@ -14,15 +14,24 @@ class BasketController extends Controller
         $basket = $session->get('basket', new Basket());
         $products = [];
         if($basket->getContent()){
+          $data = array();
+          $formBuilder = $this->createFormBuilder($data, array(
+              'action' => $this->generateUrl('sil16_vitrine_basket_index')
+          ));
           foreach($basket->getContent() as $product_id => $qty){
             $products[] = array(
               'product' => $product_manager->find($product_id),
               'qty' => $qty
             );
+            $formBuilder->add('quantity', 'number', array("label" => "Quantité", "data" => $basket->getContent()[$product_id]));
           }
+          $formBuilder->add('submit', 'submit');
+          $form = $formBuilder->getForm();
+        } else {
+          return $this->render('sil16VitrineBundle:Basket:index.html.twig', array('products' => $products, 'form' => null));
         }
 
-        return $this->render('sil16VitrineBundle:Basket:index.html.twig', array('products' => $products));
+        return $this->render('sil16VitrineBundle:Basket:index.html.twig', array('products' => $products, 'form' => $form->createView()));
     }
 
     public function addProductAction(Request $request){
@@ -38,6 +47,21 @@ class BasketController extends Controller
         $basket = $session->get('basket', new Basket());
 
         $basket->addProduct($product_id, $quantity);
+
+        $session->set('basket', $basket);
+
+        return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
+    }
+
+    public function deleteProductAction($product_id){
+        $session = $this->getRequest()->getSession();
+
+        $product = $this->findProduct($product_id);
+
+        # Récupère un panier déjà présent en session OU en créé un.
+        $basket = $session->get('basket', new Basket());
+
+        $basket->deleteProduct($product_id);
 
         $session->set('basket', $basket);
 
