@@ -46,7 +46,8 @@
             {% endfor %}
             </tbody>
           </table>
-          <a href="{{ path('sil16_vitrine_basket_clear') }}" class="btn btn-primary" onclick="return confirm('Voulez-vous vraiment vider votre panier ?')">Vider le panier</a>
+          <a href="{{ path('sil16_vitrine_basket_clear') }}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment vider votre panier ?')">Vider le panier</a>
+          <a href="{{ path('sil16_vitrine_order_create') }}" class="btn btn-primary" onclick="return confirm('Confirmer la commande ?')">Confirmer la commande</a>
         {% else %}
            <h2>Votre panier est vide : Faites des courses !</h2>
         {% endif %}

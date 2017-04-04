@@ -12,6 +12,10 @@ sil16_vitrine_subscription:
     path:     /inscription
     defaults: { _controller: sil16VitrineBundle:Customer:new }
 
+sil16_vitrine_logout:
+    path:     /deconnexion
+    defaults: { _controller: sil16VitrineBundle:Customer:destroyCustomerSession }
+
 ### CATALOGUE ##################################################################
 # CATEGORIES
 sil16_vitrine_catalogue:

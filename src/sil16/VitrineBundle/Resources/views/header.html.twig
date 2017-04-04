@@ -20,16 +20,24 @@
            Mon Panier
         </a>
       </li>
-      <li>
-        <a href="{{ path('sil16_vitrine_subscription') }}">
-           Se connecter
-        </a>
-      </li>
-      <li>
-        <a href="#">
-           Se déconnecter
-        </a>
-      </li>
+      {% if app.session.get('customer') == null %}
+        <li>
+          <a href="{{ path('sil16_vitrine_subscription') }}">
+             S'inscrire
+          </a>
+        </li>
+        <li>
+          <a href="#">
+             Se connecter
+          </a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{{ path('sil16_vitrine_logout') }}">
+             Se déconnecter
+          </a>
+        </li>
+      {% endif %}
       </ul>
     </div><!--/.nav-collapse -->
   </div>

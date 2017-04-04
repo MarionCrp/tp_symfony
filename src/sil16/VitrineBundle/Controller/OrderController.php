@@ -9,6 +9,13 @@ use sil16\VitrineBundle\Entity\Basket;
 class OrderController extends Controller
 {
     public function createAction() {
+      $session = $this->getRequest()->getSession();
+      $basket = $session->get('basket', new Basket());
+      // Add product dans une ligne de commande qu'on affecte à une Order
+      // Remove la ligne de la session basket (un article peut avoir planté mais on veut valider les autres)
+
+
+      // TODO : On redirige vers l'index des Order ("Mes commandes effectuées")
       return $this->redirect($this->generateUrl('sil16_vitrine_index'));
     }
 

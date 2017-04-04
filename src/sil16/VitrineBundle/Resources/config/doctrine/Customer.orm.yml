@@ -7,9 +7,6 @@ sil16\VitrineBundle\Entity\Customer:
       generator: { strategy: AUTO }
 
   fields:
-    name:
-      type: string
-      length: 100
     firstname:
       type: string
       length: 100
