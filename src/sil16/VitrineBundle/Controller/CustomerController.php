@@ -19,7 +19,6 @@ class CustomerController extends Controller
          ->getForm();
 
      $form->handleRequest($request);
-
      if ($form->isSubmitted() && $form->isValid()) {
          $new_customer = $form->getData();
          $em = $this->getDoctrine()->getManager();
@@ -32,18 +31,40 @@ class CustomerController extends Controller
          $em->flush();
 
          // Mise en session
-         $session = $this->getRequest()->getSession();
-         $session->set('customer', $this->getCustomerByEmail($new_customer->getEmail()));
-
+         $this->createSession($this->getCustomerByEmail($new_customer->getEmail()));
          $this->addFlash('success', "Votre compte a bien été créé");
          return $this->redirectToRoute('sil16_vitrine_accueil');
        }
      }
-
-    //  return $this->render('customer/new.html.twig', array(
-    //      'form' => $form->createView(),
-    //  ));
       return $this->render('sil16VitrineBundle:Customer:new.html.twig', array('customer' => $customer, 'form' => $form->createView()));
+    }
+
+    public function logInAction(Request $request){
+      $customer = new Customer();
+      $form = $this->createFormBuilder($customer)
+         ->add('email', 'text')
+         ->add('password', 'password')
+         ->add('submit', 'submit')
+         ->getForm();
+
+     $form->handleRequest($request);
+
+     if ($form->isSubmitted() && $form->isValid()) {
+         $logging_in_customer = $form->getData();
+         $em = $this->getDoctrine()->getManager();
+         $customer = $this->getCustomerByEmail($logging_in_customer->getEmail());
+         if($customer){
+            // On compare les mots de passe.
+            if($customer->getPassword() == $logging_in_customer->getPassword()){
+              // Mise en session
+              $this->createSession($customer);
+              $this->addFlash('success', "Connecté avec succès");
+              return $this->redirectToRoute('sil16_vitrine_accueil');
+            }
+         }
+         $this->addFlash('danger', "L'email ou le mot de passe est incorrect");
+     }
+      return $this->render('sil16VitrineBundle:Customer:log_in.html.twig', array('customer' => $customer, 'form' => $form->createView()));
     }
 
     public function destroyCustomerSessionAction(){
@@ -54,8 +75,7 @@ class CustomerController extends Controller
 
     private function createSession($customer) {
       $session = $this->getRequest()->getSession();
-      $customer = $session->get('customer', new Customer());
-      $em = $this->getDoctrine()->getManager();
+      $session->set('customer', $customer);
     }
 
     private function getCustomerByEmail($email){

@@ -7,11 +7,18 @@ sil16_vitrine_mentions:
     path:     /mentions-legales
     defaults: { _controller: sil16VitrineBundle:Default:mentions }
 
-# CONNEXION
+### CUSTOMER SESSION ###########################################################
+# INSCRIPTION
 sil16_vitrine_subscription:
     path:     /inscription
     defaults: { _controller: sil16VitrineBundle:Customer:new }
 
+# CONNEXION
+sil16_vitrine_login:
+    path:     /connexion
+    defaults: { _controller: sil16VitrineBundle:Customer:logIn }
+
+# DECONNEXION
 sil16_vitrine_logout:
     path:     /deconnexion
     defaults: { _controller: sil16VitrineBundle:Customer:destroyCustomerSession }
@@ -27,6 +34,7 @@ sil16_vitrine_articles_par_categorie:
     path:     /catalogue/{product_category_id}
     defaults: { _controller: sil16VitrineBundle:Product:index, product_category_id: "1" }
 
+### BASKET #####################################################################
 # BASKET
 sil16_vitrine_basket_index:
     path:     /mon-panier
