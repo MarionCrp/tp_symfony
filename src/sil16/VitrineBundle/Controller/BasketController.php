@@ -19,11 +19,14 @@ class BasketController extends Controller
               'action' => $this->generateUrl('sil16_vitrine_basket_index')
           ));
           foreach($basket->getContent() as $product_id => $qty){
-            $products[] = array(
-              'product' => $product_manager->find($product_id),
-              'qty' => $qty
-            );
-            $formBuilder->add('quantity', 'number', array("label" => "Quantité", "data" => $basket->getContent()[$product_id]));
+            $product = $this->findProduct($product_id);
+            if($product){
+              $products[] = array(
+                'product' => $product,
+                'qty' => $qty
+              );
+              $formBuilder->add('quantity', 'number', array("label" => "Quantité", "data" => $basket->getContent()[$product_id]));
+            }
           }
           $formBuilder->add('submit', 'submit');
           $form = $formBuilder->getForm();
@@ -88,7 +91,11 @@ class BasketController extends Controller
         $product = $product_manager->find($product_id);
       }
       if (!$product) {
-        throw $this->createNotFoundException("Ce produit n'existe pas");
+        $session = $this->getRequest()->getSession();
+        $basket = $session->get('basket', new Basket());
+        $basket->deleteProduct($product_id);
+        $session->set('basket', $basket);
+        return null;
       } else {
         return $product;
       }

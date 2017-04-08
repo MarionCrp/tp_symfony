@@ -45,7 +45,7 @@ class OrderLine
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -68,7 +68,7 @@ class OrderLine
     /**
      * Get quantity
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuantity()
     {
@@ -91,7 +91,7 @@ class OrderLine
     /**
      * Get price
      *
-     * @return string 
+     * @return string
      */
     public function getPrice()
     {
@@ -124,7 +124,7 @@ class OrderLine
     /**
      * Get products
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts()
     {
@@ -147,7 +147,7 @@ class OrderLine
     /**
      * Get order
      *
-     * @return \sil16\VitrineBundle\Entity\Order 
+     * @return \sil16\VitrineBundle\Entity\Order
      */
     public function getOrder()
     {
@@ -180,7 +180,7 @@ class OrderLine
     /**
      * Get unit_price
      *
-     * @return string 
+     * @return string
      */
     public function getUnitPrice()
     {
@@ -203,10 +203,38 @@ class OrderLine
     /**
      * Get product
      *
-     * @return \sil16\VitrineBundle\Entity\Product 
+     * @return \sil16\VitrineBundle\Entity\Product
      */
     public function getProduct()
     {
         return $this->product;
+    }
+    /**
+     * @var \sil16\VitrineBundle\Entity\Commande
+     */
+    private $commande;
+
+
+    /**
+     * Set commande
+     *
+     * @param \sil16\VitrineBundle\Entity\Commande $commande
+     * @return OrderLine
+     */
+    public function setCommande(\sil16\VitrineBundle\Entity\Commande $commande = null)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \sil16\VitrineBundle\Entity\Commande 
+     */
+    public function getCommande()
+    {
+        return $this->commande;
     }
 }

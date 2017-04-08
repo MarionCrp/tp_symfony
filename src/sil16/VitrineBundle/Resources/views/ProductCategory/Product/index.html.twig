@@ -24,7 +24,7 @@
       {% for product in products %}
   				<div class="col-lg-3">
   					<div class="tilt">
-  					     <a href="#"><img class="product_picture" src="{{ asset('bundles/sil16vitrine/pictures/products/'~ product.getPictures().first().getName()) }}" alt="product.getPictures().first().getName()" width=300></a>
+  					     <a href="#"><img class="product_picture" src="{{ asset('bundles/sil16vitrine/pictures/products/'~ product.getPictures().first().getName()) }}.jpg" alt="product.getPictures().first().getName()" width=300></a>
                  <h2> {{ product.name() }} </h2>
                  <div class="price">{{ product.price_to_s() }} </div>
                  <p>
@@ -61,19 +61,16 @@
         var pictures = document.getElementsByClassName('product_picture');
         for (i = 0; i < pictures.length; i++) {
           pictures[i].addEventListener("mouseover", function( event ) {
-            var src = this.src;
-            var new_src = src.slice(0,src.length - 6) + src.slice(src.length - 4, src.length)
-            this.src = new_src;
+            var the_src = this.src
+            this.src = the_src.replace("off", "on");
           });
 
           pictures[i].addEventListener("mouseout", function( event ) {
-            var src = this.src;
-            var new_src = src.slice(0,src.length - 4) + "_2" + src.slice(src.length - 4, src.length)
-            this.src = new_src;
+            var the_src = this.src
+            this.src = the_src.replace("on", "off");
           });
 
         }
-      }
-    );
+      });
   </script>
 {% endblock %}

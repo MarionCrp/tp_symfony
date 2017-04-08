@@ -1,5 +1,4 @@
 	window.addEventListener("load", function() {
-		debugger;
 		// Suppression de la flash message.
 		setTimeout(fade_out, 4000);
 		function fade_out() {

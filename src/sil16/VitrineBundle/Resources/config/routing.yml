@@ -34,6 +34,7 @@ sil16_vitrine_articles_par_categorie:
     path:     /catalogue/{product_category_id}
     defaults: { _controller: sil16VitrineBundle:Product:index, product_category_id: "1" }
 
+
 ### BASKET #####################################################################
 # BASKET
 sil16_vitrine_basket_index:

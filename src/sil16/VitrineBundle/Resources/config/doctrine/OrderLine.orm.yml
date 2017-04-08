@@ -21,8 +21,8 @@ sil16\VitrineBundle\Entity\OrderLine:
         name: product_id
         referencedColumnName: id
 
-    order:
-      targetEntity: Order
+    commande:
+      targetEntity: Commande
       inversedBy: order_lines
       joinColum:
         name: order_id

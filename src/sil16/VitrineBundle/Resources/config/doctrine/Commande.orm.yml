@@ -1,6 +1,6 @@
-sil16\VitrineBundle\Entity\Order:
+sil16\VitrineBundle\Entity\Commande:
   type: entity
-  table: order
+  table: commande
   id:
     id:
       type: integer
@@ -9,11 +9,11 @@ sil16\VitrineBundle\Entity\Order:
   manyToOne:
     customer:
       targetEntity: Customer
-      inversedBy: orders
+      inversedBy: commandes
       joinColumn:
         name: customer_id
         referencedColumnName: id
   oneToMany:
     order_lines:
       targetEntity: OrderLine
-      mappedBy: order
+      mappedBy: commande

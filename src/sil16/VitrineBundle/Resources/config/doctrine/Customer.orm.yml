@@ -22,6 +22,6 @@ sil16\VitrineBundle\Entity\Customer:
 
 
   oneToMany:
-    orders:
-      targetEntity: Order
+    commandes:
+      targetEntity: Commande
       mappedBy: customer

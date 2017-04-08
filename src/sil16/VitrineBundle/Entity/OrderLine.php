@@ -209,4 +209,32 @@ class OrderLine
     {
         return $this->product;
     }
+    /**
+     * @var \sil16\VitrineBundle\Entity\Commande
+     */
+    private $commande;
+
+
+    /**
+     * Set commande
+     *
+     * @param \sil16\VitrineBundle\Entity\Commande $commande
+     * @return OrderLine
+     */
+    public function setCommande(\sil16\VitrineBundle\Entity\Commande $commande = null)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \sil16\VitrineBundle\Entity\Commande 
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
 }

@@ -182,4 +182,42 @@ class Customer
     {
         return $this->password;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $commandes;
+
+
+    /**
+     * Add commandes
+     *
+     * @param \sil16\VitrineBundle\Entity\Commande $commandes
+     * @return Customer
+     */
+    public function addCommande(\sil16\VitrineBundle\Entity\Commande $commandes)
+    {
+        $this->commandes[] = $commandes;
+
+        return $this;
+    }
+
+    /**
+     * Remove commandes
+     *
+     * @param \sil16\VitrineBundle\Entity\Commande $commandes
+     */
+    public function removeCommande(\sil16\VitrineBundle\Entity\Commande $commandes)
+    {
+        $this->commandes->removeElement($commandes);
+    }
+
+    /**
+     * Get commandes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCommandes()
+    {
+        return $this->commandes;
+    }
 }
