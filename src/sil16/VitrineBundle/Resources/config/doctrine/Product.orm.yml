@@ -1,5 +1,6 @@
 sil16\VitrineBundle\Entity\Product:
   type: entity
+  repositoryClass: sil16\VitrineBundle\Entity\ProductRepository
   table: product
   id:
     id:

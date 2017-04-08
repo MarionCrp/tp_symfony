@@ -25,7 +25,7 @@ class ProductController extends Controller
                 'action' => $this->generateUrl('sil16_vitrine_basket_add_product')
             ))
             ->add('product_id', 'hidden')
-            ->add('quantity', 'number', array("label" => "Quantité", "data" => 1))
+            ->add('quantity', 'integer', array("label" => "Quantité", "data" => 1))
             ->add('submit', 'submit')
             ->getForm();
             $form_views[$product->getId()] = $form->createView();

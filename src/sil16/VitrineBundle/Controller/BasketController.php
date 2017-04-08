@@ -46,14 +46,18 @@ class BasketController extends Controller
         $quantity = $params['quantity'];
 
         $product = $this->findProduct($product_id);
-        if($product){
+        if($product && $product->getStock() >= $quantity){
           $basket = $session->get('basket', new Basket());
           $basket->addProduct($product_id, $quantity);
           $session->set('basket', $basket);
           $this->addFlash('success', "Le produit a été ajouté avec succès !");
           return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
         } else {
-          $this->addFlash('danger', "Le produit ajouté n'existe pas");
+          if(!$product){
+            $this->addFlash('danger', "Le produit ajouté n'existe pas");
+          } else {
+            $this->addFlash('danger', "Le stock est insuffisant.");
+          }
           return $this->redirect($this->generateUrl('sil16_vitrine_catalogue'));
         }
     }

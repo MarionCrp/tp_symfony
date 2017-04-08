@@ -22,30 +22,23 @@ class OrderLine
     /**
      * @var string
      */
-    private $price;
+    private $unit_price;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \sil16\VitrineBundle\Entity\Product
      */
-    private $products;
+    private $product;
 
     /**
-     * @var \sil16\VitrineBundle\Entity\Order
+     * @var \sil16\VitrineBundle\Entity\Commande
      */
-    private $order;
+    private $commande;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -68,101 +61,12 @@ class OrderLine
     /**
      * Get quantity
      *
-     * @return integer
+     * @return integer 
      */
     public function getQuantity()
     {
         return $this->quantity;
     }
-
-    /**
-     * Set price
-     *
-     * @param string $price
-     * @return OrderLine
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * Add products
-     *
-     * @param \sil16\VitrineBundle\Entity\Product $products
-     * @return OrderLine
-     */
-    public function addProduct(\sil16\VitrineBundle\Entity\Product $products)
-    {
-        $this->products[] = $products;
-
-        return $this;
-    }
-
-    /**
-     * Remove products
-     *
-     * @param \sil16\VitrineBundle\Entity\Product $products
-     */
-    public function removeProduct(\sil16\VitrineBundle\Entity\Product $products)
-    {
-        $this->products->removeElement($products);
-    }
-
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-    /**
-     * Set order
-     *
-     * @param \sil16\VitrineBundle\Entity\Order $order
-     * @return OrderLine
-     */
-    public function setOrder(\sil16\VitrineBundle\Entity\Order $order = null)
-    {
-        $this->order = $order;
-
-        return $this;
-    }
-
-    /**
-     * Get order
-     *
-     * @return \sil16\VitrineBundle\Entity\Order
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-    /**
-     * @var string
-     */
-    private $unit_price;
-
-    /**
-     * @var \sil16\VitrineBundle\Entity\Product
-     */
-    private $product;
-
 
     /**
      * Set unit_price
@@ -180,7 +84,7 @@ class OrderLine
     /**
      * Get unit_price
      *
-     * @return string
+     * @return string 
      */
     public function getUnitPrice()
     {
@@ -203,17 +107,12 @@ class OrderLine
     /**
      * Get product
      *
-     * @return \sil16\VitrineBundle\Entity\Product
+     * @return \sil16\VitrineBundle\Entity\Product 
      */
     public function getProduct()
     {
         return $this->product;
     }
-    /**
-     * @var \sil16\VitrineBundle\Entity\Commande
-     */
-    private $commande;
-
 
     /**
      * Set commande

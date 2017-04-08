@@ -5,7 +5,8 @@ namespace sil16\VitrineBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use sil16\VitrineBundle\Entity\Basket;
-use sil16\VitrineBundle\Entity\Order;
+use sil16\VitrineBundle\Entity\Commande;
+use sil16\VitrineBundle\Entity\OrderLine;
 
 class OrderController extends Controller
 {
@@ -14,24 +15,30 @@ class OrderController extends Controller
       $basket = $session->get('basket', new Basket());
       // Add product dans une ligne de commande qu'on affecte à une Order
       $em = $this->getDoctrine()->getManager();
-      if(!empty($basket)){
-        $new_order = new Order();
+
+      if(!empty($basket->getContent())){
+        $new_order = new Commande();
         $new_order->setCustomer($this->findCustomer());
-        foreach($basket as $product_id => $quantity){
+        foreach($basket->getContent() as $product_id => $quantity){
           $product = $this->findProduct($product_id);
-          $order_line = new OrderLine;
-          $order_line->setUnitPrice($product->getPrice());
-          $order_line->setQuantity($quantity);
-          $order_line->setProduct($product);
-          $order_line->setOrder($order);
+          // On vérifie que le produit existe et que le stock suffise
+          if($product && $product->getStock() >= $quantity){
+            $order_line = new OrderLine;
+            $order_line->setUnitPrice($product->getPrice());
+            $order_line->setQuantity($quantity);
+            $order_line->setProduct($product);
+            $order_line->setCommande($new_order);
+            $em->persist($order_line);
 
-          $em->persist($order_line);
-          $new_order->addOrderLine($order_line);
-
+            $stock = $product->getStock();
+            $product->setStock($stock - $quantity);
+            $em->persist($product);
+          }
           $basket->deleteProduct($product_id);
         }
          // Ajout dans la BDD
         $em->persist($new_order);
+
 
         // Le panier est sensé être vide si tout s'est bien passé
         $session->set('basket', $basket);
@@ -42,7 +49,7 @@ class OrderController extends Controller
       }
 
       // TODO : On redirige vers l'index des Order ("Mes commandes effectuées")
-      return $this->redirect($this->generateUrl('sil16_vitrine_index'));
+      return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
     }
 
     public function addProductAction(Request $request){

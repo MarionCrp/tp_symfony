@@ -30,28 +30,32 @@ class Customer
     private $email;
 
     /**
+     * @var string
+     */
+    private $password;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $orders;
+    private $commandes;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
         return $this->id;
     }
-
 
     /**
      * Set firstname
@@ -69,7 +73,7 @@ class Customer
     /**
      * Get firstname
      *
-     * @return string
+     * @return string 
      */
     public function getFirstname()
     {
@@ -92,7 +96,7 @@ class Customer
     /**
      * Get lastname
      *
-     * @return string
+     * @return string 
      */
     public function getLastname()
     {
@@ -115,50 +119,12 @@ class Customer
     /**
      * Get email
      *
-     * @return string
+     * @return string 
      */
     public function getEmail()
     {
         return $this->email;
     }
-
-    /**
-     * Add orders
-     *
-     * @param \sil16\VitrineBundle\Entity\Orders $orders
-     * @return Customer
-     */
-    public function addOrder(\sil16\VitrineBundle\Entity\Orders $orders)
-    {
-        $this->orders[] = $orders;
-
-        return $this;
-    }
-
-    /**
-     * Remove orders
-     *
-     * @param \sil16\VitrineBundle\Entity\Orders $orders
-     */
-    public function removeOrder(\sil16\VitrineBundle\Entity\Orders $orders)
-    {
-        $this->orders->removeElement($orders);
-    }
-
-    /**
-     * Get orders
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrders()
-    {
-        return $this->orders;
-    }
-    /**
-     * @var string
-     */
-    private $password;
-
 
     /**
      * Set password
@@ -176,17 +142,12 @@ class Customer
     /**
      * Get password
      *
-     * @return string
+     * @return string 
      */
     public function getPassword()
     {
         return $this->password;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $commandes;
-
 
     /**
      * Add commandes

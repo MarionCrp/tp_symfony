@@ -8,7 +8,10 @@ class DefaultController extends Controller
 {
     public function indexAction($name)
     {
-        return $this->render('sil16VitrineBundle:Default:index.html.twig', array('name' => $name));
+        $em = $this->getDoctrine()->getManager();
+        $order_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Commande');
+        $order = $order_manager->find(9);
+        return $this->render('sil16VitrineBundle:Default:index.html.twig', array('name' => $name, 'order' => $order));
     }
 
     public function mentionsAction()
