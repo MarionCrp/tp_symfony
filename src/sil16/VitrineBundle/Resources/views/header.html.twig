@@ -20,7 +20,7 @@
            Mon Panier
         </a>
       </li>
-      {% if app.session.get('customer') == null %}
+      {% if app.session.get('customer_id') == null %}
         <li>
           <a href="{{ path('sil16_vitrine_subscription') }}">
              S'inscrire

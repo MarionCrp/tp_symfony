@@ -5,6 +5,7 @@ namespace sil16\VitrineBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use sil16\VitrineBundle\Entity\Basket;
+use sil16\VitrineBundle\Entity\Order;
 
 class OrderController extends Controller
 {
@@ -12,8 +13,33 @@ class OrderController extends Controller
       $session = $this->getRequest()->getSession();
       $basket = $session->get('basket', new Basket());
       // Add product dans une ligne de commande qu'on affecte à une Order
-      // Remove la ligne de la session basket (un article peut avoir planté mais on veut valider les autres)
+      $em = $this->getDoctrine()->getManager();
+      if(!empty($basket)){
+        $new_order = new Order();
+        $new_order->setCustomer($this->findCustomer());
+        foreach($basket as $product_id => $quantity){
+          $product = $this->findProduct($product_id);
+          $order_line = new OrderLine;
+          $order_line->setUnitPrice($product->getPrice());
+          $order_line->setQuantity($quantity);
+          $order_line->setProduct($product);
+          $order_line->setOrder($order);
 
+          $em->persist($order_line);
+          $new_order->addOrderLine($order_line);
+
+          $basket->deleteProduct($product_id);
+        }
+         // Ajout dans la BDD
+        $em->persist($new_order);
+
+        // Le panier est sensé être vide si tout s'est bien passé
+        $session->set('basket', $basket);
+        $em->flush();
+        $this->addFlash('success', "Félicitation pour votre commande!");
+      } else {
+        $this->addFlash('danger', "La commande a échouée : Votre panier est vide.");
+      }
 
       // TODO : On redirige vers l'index des Order ("Mes commandes effectuées")
       return $this->redirect($this->generateUrl('sil16_vitrine_index'));
@@ -44,9 +70,21 @@ class OrderController extends Controller
         $product = $product_manager->find($product_id);
       }
       if (!$product) {
-        throw $this->createNotFoundException("Ce produit n'existe pas");
+        throw $this->createNotFoundException("Erreur : Ce produit n'existe pas");
       } else {
         return $product;
+      }
+    }
+
+    private function findCustomer(){
+      $session = $this->getRequest()->getSession();
+      $customer_id = (int) $session->get('customer_id');
+      $customer_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Customer');
+      $customer = $customer_manager->find($customer_id);
+      if(!$customer){
+        throw $this->createNotFoundException("Erreur : L'utilisateur n'existe pas");
+      } else {
+        return $customer;
       }
     }
 }

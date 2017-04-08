@@ -68,14 +68,14 @@ class CustomerController extends Controller
     }
 
     public function destroyCustomerSessionAction(){
-        $this->getRequest()->getSession()->remove('customer');
+        $this->getRequest()->getSession()->remove('customer_id');
         $this->addFlash('success', "Deconnecté avec succès");
         return $this->redirectToRoute('sil16_vitrine_accueil');
     }
 
     private function createSession($customer) {
       $session = $this->getRequest()->getSession();
-      $session->set('customer', $customer);
+      $session->set('customer_id', $customer->getId());
     }
 
     private function getCustomerByEmail($email){

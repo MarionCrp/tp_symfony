@@ -23,7 +23,7 @@ class Order
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -46,7 +46,7 @@ class Order
     /**
      * Get customer
      *
-     * @return \sil16\VitrineBundle\Entity\Customer 
+     * @return \sil16\VitrineBundle\Entity\Customer
      */
     public function getCustomer()
     {
@@ -91,7 +91,7 @@ class Order
     /**
      * Get order_lines
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOrderLines()
     {
