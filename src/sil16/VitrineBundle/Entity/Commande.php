@@ -35,7 +35,7 @@ class Commande
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -68,7 +68,7 @@ class Commande
     /**
      * Get order_lines
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOrderLines()
     {
@@ -91,10 +91,39 @@ class Commande
     /**
      * Get customer
      *
-     * @return \sil16\VitrineBundle\Entity\Customer 
+     * @return \sil16\VitrineBundle\Entity\Customer
      */
     public function getCustomer()
     {
         return $this->customer;
+    }
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     */
+    private $created_at;
+
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return Commande
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 }

@@ -6,6 +6,10 @@ sil16\VitrineBundle\Entity\Commande:
       type: integer
       generator: { strategy: AUTO }
 
+  fields:
+    created_at:
+      type: datetime
+      columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   manyToOne:
     customer:
       targetEntity: Customer

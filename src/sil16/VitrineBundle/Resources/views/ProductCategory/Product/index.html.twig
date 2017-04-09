@@ -24,7 +24,12 @@
       {% for product in products %}
   				<div class="col-lg-3">
   					<div class="tilt">
+              {% if product.getPictures()|length > 0  %}
   					     <a href="#"><img class="product_picture" src="{{ asset('bundles/sil16vitrine/pictures/products/'~ product.getPictures().first().getName()) }}.jpg" alt="product.getPictures().first().getName()" width=300></a>
+              {% else %}
+                 <a href="#"><img src="{{ asset('bundles/sil16vitrine/pictures/products/no_available.jpg') }}" alt="Pas de photo disponible" width=300 height=300></a>
+              {% endif %}
+
                  <h2> {{ product.name() }} </h2>
                  <div class="price">{{ product.price_to_s() }} </div>
                  <p>

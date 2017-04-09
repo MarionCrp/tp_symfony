@@ -42,12 +42,14 @@ class BasketController extends Controller
         $params = $this->getRequest()->request->get('form');
 
         // PARAMS
-        $product_id = $params['product_id'];
+        $product_id = (int)$params['product_id'];
         $quantity = $params['quantity'];
 
         $product = $this->findProduct($product_id);
-        if($product && $product->getStock() >= $quantity){
-          $basket = $session->get('basket', new Basket());
+
+        $basket = $session->get('basket', new Basket());
+        $basket_product_quantity = array_key_exists($product_id, $basket->getContent()) ? $basket->getContent()[$product_id] : 0;
+        if($product && ($product->getStock() >= $quantity + (int) $basket_product_quantity)){
           $basket->addProduct($product_id, $quantity);
           $session->set('basket', $basket);
           $this->addFlash('success', "Le produit a été ajouté avec succès !");

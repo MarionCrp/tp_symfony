@@ -22,7 +22,7 @@ th, td {
 #flash {
 	position: fixed;
     z-index: 1500;
-    top: 30px;
+    top: 80px;
     width: 100%;
     text-align: center;
     font-weight: bold;

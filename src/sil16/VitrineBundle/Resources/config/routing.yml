@@ -32,7 +32,7 @@ sil16_vitrine_catalogue:
 # PRODUCTS
 sil16_vitrine_articles_par_categorie:
     path:     /catalogue/{product_category_id}
-    defaults: { _controller: sil16VitrineBundle:Product:index, product_category_id: "1" }
+    defaults: { _controller: sil16VitrineBundle:Product:index }
 
 
 ### BASKET #####################################################################
@@ -54,3 +54,6 @@ sil16_vitrine_basket_clear:
 sil16_vitrine_commande_create:
     path:     /mon-panier/create
     defaults: { _controller: sil16VitrineBundle:Commande:create }
+sil16_vitrine_commande_index:
+    path:     /mon-panier/index
+    defaults: { _controller: sil16VitrineBundle:Commande:index }

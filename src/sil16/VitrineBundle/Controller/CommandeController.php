@@ -10,10 +10,13 @@ use sil16\VitrineBundle\Entity\OrderLine;
 
 class CommandeController extends Controller
 {
-
     public function indexAction(){
-      $session = $this->getRequest()->getSession();
-
+      $current_customer = $this->findCurrentCustomer();
+      $commandes = [];
+      if($current_customer){
+        $commandes = $current_customer->getCommandes();
+      }
+      return $this->render('sil16VitrineBundle:Commande:index.html.twig', array('commandes' => $commandes));
     }
 
     public function createAction() {
@@ -21,7 +24,7 @@ class CommandeController extends Controller
       $basket = $session->get('basket', new Basket());
       // Add product dans une ligne de commande qu'on affecte à une Order
       $em = $this->getDoctrine()->getManager();
-      $current_customer = $this->findCustomer();
+      $current_customer = $this->findCurrentCustomer();
       if(!$current_customer){
         $this->addFlash('danger', "Vous devez être connecté pour commander");
         return $this->redirect($this->generateUrl('sil16_vitrine_login'));
@@ -53,8 +56,7 @@ class CommandeController extends Controller
           $session->set('basket', $basket);
           $em->flush();
           $this->addFlash('success', "Félicitation pour votre commande!");
-          // TODO : On redirige vers l'index des Order ("Mes commandes effectuées")
-          return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
+          return $this->redirect($this->generateUrl('sil16_vitrine_commande_index'));
         } else {
           $this->addFlash('danger', "La commande a échouée : Votre panier est vide.");
           return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
@@ -93,7 +95,7 @@ class CommandeController extends Controller
       }
     }
 
-    private function findCustomer(){
+    private function findCurrentCustomer(){
       $session = $this->getRequest()->getSession();
       $customer_id = (int) $session->get('customer_id');
       $customer_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Customer');
