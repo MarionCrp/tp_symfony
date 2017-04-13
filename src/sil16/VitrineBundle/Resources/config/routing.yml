@@ -1,3 +1,7 @@
+sil16_vitrine_customer:
+    resource: "@sil16VitrineBundle/Resources/config/routing/customer.yml"
+    prefix:   /customer
+
 # STATIC PAGES
 sil16_vitrine_accueil:
     path:     /accueil/{name}
@@ -33,6 +37,9 @@ sil16_vitrine_catalogue:
 sil16_vitrine_articles_par_categorie:
     path:     /catalogue/{product_category_id}
     defaults: { _controller: sil16VitrineBundle:Product:index }
+sil16_vitrine_articles_best_sell:
+    path:     /catalogue/bestSell
+    defaults: { _controller: sil16VitrineBundle:Product:bestSell }
 
 
 ### BASKET #####################################################################
@@ -40,6 +47,9 @@ sil16_vitrine_articles_par_categorie:
 sil16_vitrine_basket_index:
     path:     /mon-panier
     defaults: { _controller: sil16VitrineBundle:Basket:index }
+sil16_vitrine_basket_content:
+    path:     /mon-panier/content
+    defaults: { _controller: sil16VitrineBundle:Basket:getContent }
 sil16_vitrine_basket_add_product:
     path:     /mon-panier/add_product
     defaults: { _controller: sil16VitrineBundle:Basket:addProduct }
@@ -57,3 +67,6 @@ sil16_vitrine_commande_create:
 sil16_vitrine_commande_index:
     path:     /mon-panier/index
     defaults: { _controller: sil16VitrineBundle:Commande:index }
+sil16_vitrine_commande_index:
+    path:     /mon-panier/validation
+    defaults: { _controller: sil16VitrineBundle:Commande:validation }

@@ -27,3 +27,12 @@ th, td {
     text-align: center;
     font-weight: bold;
 }
+
+#total_amount_label {
+  font-weight: bold;
+  float: right;
+}
+
+.row.content {
+  margin-top: 90px;
+}

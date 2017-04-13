@@ -44,9 +44,13 @@
               </td>
               </tr>
             {% endfor %}
+            <tr>
+              <td colspan="3"><span id="total_amount_label">Montant total</span></td>
+              <td style="font-weight: bold;">{{ total_amount }}</td>
+              <td><a href="{{ path('sil16_vitrine_basket_clear') }}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment vider votre panier ?')">Vider le panier</a></td>
+            </tr>
             </tbody>
           </table>
-          <a href="{{ path('sil16_vitrine_basket_clear') }}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment vider votre panier ?')">Vider le panier</a>
           <a href="{{ path('sil16_vitrine_commande_create') }}" class="btn btn-primary" onclick="return confirm('Confirmer la commande ?')">Confirmer la commande</a>
         {% else %}
            <h2>Votre panier est vide : Faites des courses !</h2>

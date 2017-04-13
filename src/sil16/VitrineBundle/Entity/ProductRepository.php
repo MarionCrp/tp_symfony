@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+  public function findBestSells($n=3) {
+    $first_query = $this->getEntityManager()
+                ->createQuery('select p, sum(ol.quantity) as qte from sil16VitrineBundle:Product p, sil16VitrineBundle:OrderLine ol where ol.product = p group by ol.product order by qte DESC')
+                ->setMaxResults($n)
+                ->getResult();
+                foreach($first_query as $element){
+                  $products[] = $element[0];
+                }
+                return $products;
+              }
 }

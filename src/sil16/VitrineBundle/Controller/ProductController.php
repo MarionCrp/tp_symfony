@@ -3,6 +3,7 @@
 namespace sil16\VitrineBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use sil16\VitrineBundle\Entity\Product;
 
 class ProductController extends Controller
@@ -38,5 +39,14 @@ class ProductController extends Controller
                                    )
                                  );
         }
+      }
+
+      public function bestSellAction(){
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('sil16VitrineBundle:Product')->findBestSells();
+        return $this->render('sil16VitrineBundle:ProductCategory:Product/best_sell.html.twig',
+                             array('products' => $products
+                                 )
+                               );
       }
 }

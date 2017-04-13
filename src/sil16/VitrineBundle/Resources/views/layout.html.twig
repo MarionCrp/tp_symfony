@@ -22,7 +22,9 @@
   </head>
 
   <body>
+
     {% include "sil16VitrineBundle::header.html.twig" %}
+
     {% for type, flash_messages in app.session.flashbag %}
       {% for flashMessage in flash_messages %}
           <div id="flash" style="display: display;">
@@ -31,8 +33,18 @@
       {% endfor %}
     {% endfor %}
 
+    <div class="row content">
+      <div class="col-sm-9">
+        {% block content endblock %}
+      </div>
+      <div class="col-sm-3">
+        {{ render(controller('sil16VitrineBundle:Basket:getContent')) }}
+      </div>
+    </div>
 
-    {% block content endblock %}
+    <div>
+      {{ render(controller('sil16VitrineBundle:Product:bestSell')) }}
+    </div>
 
     {% include "sil16VitrineBundle::footer.html.twig" %}
     <script src="{{ asset('bundles/sil16vitrine/js/jquery-3.1.1.min.js') }}"></script>

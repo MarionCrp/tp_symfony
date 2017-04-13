@@ -83,6 +83,10 @@ class CommandeController extends Controller
         return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
     }
 
+    public function validation($product_id){
+      
+    }
+
     private function findProduct($product_id){
       $product_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Product');
       if($product_id){

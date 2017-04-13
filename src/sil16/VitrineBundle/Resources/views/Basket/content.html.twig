@@ -1,0 +1,37 @@
+<div class="row centered">
+  <br>
+  {% if(products) %}
+     <h2>Contenu de votre panier</h2>
+     <table class="table table-hover">
+        <thead>
+           <tr>
+              <th>Produit</th>
+              <th>Quantité</th>
+              <th>Prix total</th>
+              <th>Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+      {% for item in products %}
+        <tr>
+          <td>{{ item['product'].name }}</td>
+          <td>{{ item['qty']  }}</td>
+          <td>{{ item['product'].price * item['qty'] }}</td>
+          <td>
+            <a href="{{ path('sil16_vitrine_basket_delete_product', { product_id: item['product'].getId() }) }}" onclick="return confirm('Voulez-vous supprimer ce produit')">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </a>
+        </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="3"><span id="total_amount_label">Montant total</span></td>
+        <td style="font-weight: bold;">{{ total_amount }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <a href="{{ path('sil16_vitrine_commande_create') }}" class="btn btn-primary" onclick="return confirm('Confirmer la commande ?')">Confirmer la commande</a>
+    <a href="{{ path('sil16_vitrine_basket_clear') }}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment vider votre panier ?')">Vider le panier</a>
+  {% else %}
+     <h2>Votre panier est vide : Faites des courses !</h2>
+  {% endif %}
+</div><!-- row -->

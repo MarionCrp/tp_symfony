@@ -1,0 +1,50 @@
+{% extends "sil16VitrineBundle::layout.html.twig" %}
+
+{% block title %} Validation commande n° {% endblock %}
+
+{% block content %}
+
+  <div id="headerwrap">
+    <div class="container">
+      <div class="row centered">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h1>Validation de votre commande</h1>
+        </div>
+      </div><!-- row -->
+    </div><!-- container -->
+  </div><!-- headerwrap -->
+  <div id="dg">
+    <div class="container">
+      <div class="row centered">
+        <br>
+        {% if commandes|length > 0 %}
+          {% for commande in commandes %}
+             <h2>Commande du {{ commande.getCreatedAt().format('d/m/Y \à H \\h i') }}.</h2>
+             <table class="table table-hover">
+                <thead>
+                   <tr>
+                      <th>Produit</th>
+                      <th>Catégorie</th>
+                      <th>Quantité</th>
+                      <th>Prix total</th>
+                  </tr>
+                </thead>
+                <tbody>
+              {% for order_line in commande.getOrderLines() %}
+                <tr>
+                  <td>{{ order_line.product.name }}</td>
+                  <td><a href="{{ path('sil16_vitrine_articles_par_categorie', { product_category_id: order_line.product.getProductCategory.getId() } ) }}">{{ order_line.product.getProductCategory.name }}</a></td>
+                  <td>{{ order_line.quantity  }}</td>
+                  <td>{{ order_line.getUnitPrice * order_line.quantity }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          {% endfor %}
+        {% else %}
+           <h2> Aucune commande effectuée </h2>
+        {% endif %}
+      </div><!-- row -->
+    </div><!-- container -->
+  </div><!-- DG -->
+{% endblock %}

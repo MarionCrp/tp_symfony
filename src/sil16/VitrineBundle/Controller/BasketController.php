@@ -14,6 +14,7 @@ class BasketController extends Controller
         $basket = $session->get('basket', new Basket());
         $products = [];
         if($basket->getContent()){
+          $total_amount = 0;
           $data = array();
           $formBuilder = $this->createFormBuilder($data, array(
               'action' => $this->generateUrl('sil16_vitrine_basket_index')
@@ -27,6 +28,7 @@ class BasketController extends Controller
               );
               $formBuilder->add('quantity', 'number', array("label" => "Quantité", "data" => $basket->getContent()[$product_id]));
             }
+            $total_amount += $product->getPrice() * $qty;
           }
           $formBuilder->add('submit', 'submit');
           $form = $formBuilder->getForm();
@@ -34,7 +36,7 @@ class BasketController extends Controller
           return $this->render('sil16VitrineBundle:Basket:index.html.twig', array('products' => $products, 'form' => null));
         }
 
-        return $this->render('sil16VitrineBundle:Basket:index.html.twig', array('products' => $products, 'form' => $form->createView()));
+        return $this->render('sil16VitrineBundle:Basket:index.html.twig', array('products' => $products, 'total_amount' => $total_amount, 'form' => $form->createView()));
     }
 
     public function addProductAction(Request $request){
@@ -105,5 +107,36 @@ class BasketController extends Controller
       } else {
         return $product;
       }
+    }
+
+    public function getContentAction(){
+      $product_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Product');
+      $session = $this->getRequest()->getSession();
+      $basket = $session->get('basket', new Basket());
+      $products = [];
+      if($basket->getContent()){
+        $total_amount = 0;
+        $data = array();
+        $formBuilder = $this->createFormBuilder($data, array(
+            'action' => $this->generateUrl('sil16_vitrine_basket_index')
+        ));
+        foreach($basket->getContent() as $product_id => $qty){
+          $product = $this->findProduct($product_id);
+          if($product){
+            $products[] = array(
+              'product' => $product,
+              'qty' => $qty
+            );
+            $formBuilder->add('quantity', 'number', array("label" => "Quantité", "data" => $basket->getContent()[$product_id]));
+          }
+          $total_amount += $product->getPrice() * $qty;
+        }
+        $formBuilder->add('submit', 'submit');
+        $form = $formBuilder->getForm();
+      } else {
+        return $this->render('sil16VitrineBundle:Basket:content.html.twig', array('products' => $products, 'form' => null));
+      }
+
+      return $this->render('sil16VitrineBundle:Basket:content.html.twig', array('products' => $products, 'total_amount' => $total_amount, 'form' => $form->createView()));
     }
 }
