@@ -67,6 +67,6 @@ sil16_vitrine_commande_create:
 sil16_vitrine_commande_index:
     path:     /mon-panier/index
     defaults: { _controller: sil16VitrineBundle:Commande:index }
-sil16_vitrine_commande_index:
-    path:     /mon-panier/validation
-    defaults: { _controller: sil16VitrineBundle:Commande:validation }
+sil16_vitrine_commande_show:
+    path:     /mon-panier/commandes/{commande_id}}
+    defaults: { _controller: sil16VitrineBundle:Commande:show }

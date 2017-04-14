@@ -47,7 +47,7 @@ class CommandeController extends Controller
               $product->setStock($stock - $quantity);
               $em->persist($product);
             }
-            $basket->deleteProduct($product_id);
+          $basket->deleteProduct($product_id);
           }
            // Ajout dans la BDD
           $em->persist($new_commande);
@@ -55,8 +55,10 @@ class CommandeController extends Controller
           // Le panier est sensé être vide si tout s'est bien passé
           $session->set('basket', $basket);
           $em->flush();
+
+          $last_commande = $this->findCurrentCustomer()->getCommandes()->last();
           $this->addFlash('success', "Félicitation pour votre commande!");
-          return $this->redirect($this->generateUrl('sil16_vitrine_commande_index'));
+          return $this->redirectToRoute('sil16_vitrine_commande_show', array('commande_id' => $last_commande->getId()));
         } else {
           $this->addFlash('danger', "La commande a échouée : Votre panier est vide.");
           return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
@@ -83,8 +85,13 @@ class CommandeController extends Controller
         return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
     }
 
-    public function validation($product_id){
-      
+    public function showAction($commande_id){
+      $commande = $this->findCommande($commande_id);
+      if($commande){
+        return $this->render('sil16VitrineBundle:Commande:show.html.twig', array('commande' => $commande));
+      } else {
+        return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
+      }
     }
 
     private function findProduct($product_id){
@@ -105,5 +112,25 @@ class CommandeController extends Controller
       $customer_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Customer');
       $customer = $customer_manager->find($customer_id);
         return $customer;
+    }
+
+    private function findCommande($commande_id){
+      $commande_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Commande');
+      if($commande_id){
+        $commande = $commande_manager->find($commande_id);
+      }
+      if (!$commande) {
+        $this->addFlash('danger', "La commande n'a pas été trouvée");
+        return null;
+      } else {
+        $current_customer = $this->findCurrentCustomer();
+        $commande->getCustomer()->getId();
+        if($current_customer == $commande->getCustomer()){
+          return $commande;
+        } else {
+          $this->addFlash('danger', "La commande n'a pas été trouvée");
+          return null;
+        }
+      }
     }
 }

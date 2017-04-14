@@ -1,6 +1,6 @@
 {% extends "sil16VitrineBundle::layout.html.twig" %}
 
-{% block title %} Mes commandes {% endblock %}
+{% block title %} Validation commande n° {% endblock %}
 
 {% block content %}
 
@@ -8,7 +8,7 @@
     <div class="container">
       <div class="row centered">
         <div class="col-lg-8 col-lg-offset-2">
-          <h1>Mes Commandes</h1>
+          <h1>Validation de votre commande</h1>
         </div>
       </div><!-- row -->
     </div><!-- container -->
@@ -17,13 +17,7 @@
     <div class="container">
       <div class="row centered">
         <br>
-        {% if commandes|length > 0 %}
-          {% for commande in commandes %}
-            {% include 'sil16VitrineBundle:Commande:_order_details.html.twig' with {'commande': commande}  %}
-          {% endfor %}
-        {% else %}
-           <h2> Aucune commande effectuée </h2>
-        {% endif %}
+          {% include 'sil16VitrineBundle:Commande:_order_details.html.twig' with {'commande': commande}  %}
       </div><!-- row -->
     </div><!-- container -->
   </div><!-- DG -->

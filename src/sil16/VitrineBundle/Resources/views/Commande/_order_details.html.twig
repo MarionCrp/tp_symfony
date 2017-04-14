@@ -1,0 +1,21 @@
+<h2>Commande du {{ commande.getCreatedAt().format('d/m/Y \à H \\h i') }}.</h2>
+<table class="table table-hover">
+   <thead>
+      <tr>
+         <th>Produit</th>
+         <th>Catégorie</th>
+         <th>Quantité</th>
+         <th>Prix total</th>
+     </tr>
+   </thead>
+   <tbody>
+ {% for order_line in commande.getOrderLines() %}
+   <tr>
+     <td>{{ order_line.product.name }}</td>
+     <td><a href="{{ path('sil16_vitrine_articles_par_categorie', { product_category_id: order_line.product.getProductCategory.getId() } ) }}">{{ order_line.product.getProductCategory.name }}</a></td>
+     <td>{{ order_line.quantity  }}</td>
+     <td>{{ order_line.getUnitPrice * order_line.quantity }}</td>
+   </tr>
+ {% endfor %}
+ </tbody>
+</table>
