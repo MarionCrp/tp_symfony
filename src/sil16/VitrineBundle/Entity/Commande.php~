@@ -97,4 +97,33 @@ class Commande
     {
         return $this->customer;
     }
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     */
+    private $created_at;
+
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return Commande
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
 }

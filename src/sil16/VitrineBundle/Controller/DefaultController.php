@@ -12,10 +12,7 @@ class DefaultController extends Controller
         if($current_customer){
           $name = $current_customer->getFirstname();
         }
-        $em = $this->getDoctrine()->getManager();
-        $order_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Commande');
-        $order = $order_manager->find(9);
-        return $this->render('sil16VitrineBundle:Default:index.html.twig', array('name' => $name, 'order' => $order));
+        return $this->render('sil16VitrineBundle:Default:index.html.twig', array('name' => $name));
     }
 
     public function mentionsAction()

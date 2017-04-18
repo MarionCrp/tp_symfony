@@ -1,6 +1,6 @@
-sil16_vitrine_customer:
-    resource: "@sil16VitrineBundle/Resources/config/routing/customer.yml"
-    prefix:   /customer
+admin:
+  resource: "@sil16AdminBundle/Resources/config/routing.yml"
+  prefix: /admin
 
 # STATIC PAGES
 sil16_vitrine_accueil:

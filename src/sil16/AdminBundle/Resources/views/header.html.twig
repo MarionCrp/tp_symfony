@@ -1,0 +1,23 @@
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ path('sil16_vitrine_accueil') }}">MyE-Commerce</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+      {% if app.session.get('admin_id') == null %}
+        <li><a href="{{ path("admin_login") }}">Se connecter</a></li>
+      {% else %}
+        <li><a href="{{ path('admin_dashboard') }}"> Dashboard </a></li>
+        <li><a href="{{ path('admin_logout') }}">Se déconnecter</a></li>
+      {% endif %}
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>

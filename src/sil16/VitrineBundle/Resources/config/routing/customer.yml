@@ -1,4 +1,0 @@
-customer_new:
-    path:     /new
-    defaults: { _controller: "sil16VitrineBundle:Customer:new" }
-    methods:  [GET, POST]

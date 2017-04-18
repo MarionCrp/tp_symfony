@@ -1,0 +1,15 @@
+### ADMIN SESSION ###########################################################
+# DASHBOARD
+admin_dashboard:
+    path:     /
+    defaults: { _controller: sil16AdminBundle:Default:index }
+
+# CONNEXION
+admin_login:
+    path:     /connexion
+    defaults: { _controller: sil16AdminBundle:Admin:logIn }
+
+# DECONNEXION
+admin_logout:
+    path:     /deconnexion
+    defaults: { _controller: sil16AdminBundle:Admin:destroyAdminSession }
