@@ -1,0 +1,24 @@
+admin_product_category_index:
+    path:     /
+    defaults: { _controller: "sil16AdminBundle:ProductCategory:index" }
+    methods:  GET
+
+admin_product_category_show:
+    path:     /{id}/show
+    defaults: { _controller: "sil16AdminBundle:ProductCategory:show" }
+    methods:  GET
+
+admin_product_category_new:
+    path:     /new
+    defaults: { _controller: "sil16AdminBundle:ProductCategory:new" }
+    methods:  [GET, POST]
+
+admin_product_category_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "sil16AdminBundle:ProductCategory:edit" }
+    methods:  [GET, POST]
+
+admin_product_category_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "sil16AdminBundle:ProductCategory:delete" }
+    methods:  DELETE

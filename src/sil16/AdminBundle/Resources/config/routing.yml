@@ -1,4 +1,8 @@
 ### ADMIN SESSION ###########################################################
+sil16_vitrine_productcategory:
+    resource: "@sil16AdminBundle/Resources/config/routing/product_category.yml"
+    prefix:   /categories
+
 # DASHBOARD
 admin_dashboard:
     path:     /
@@ -13,3 +17,5 @@ admin_login:
 admin_logout:
     path:     /deconnexion
     defaults: { _controller: sil16AdminBundle:Admin:destroyAdminSession }
+
+# DASHBOARD
