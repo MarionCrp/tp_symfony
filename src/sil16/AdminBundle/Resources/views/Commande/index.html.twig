@@ -1,0 +1,50 @@
+{% extends "sil16AdminBundle::layout.html.twig" %}
+
+{% block title %} Liste des commandes {% endblock %}
+{% block h1 %} Liste des commandes {% endblock %}
+
+{% block content %}
+
+	<div id="dg">
+		<div class="container">
+      <div class="row centered">
+        <br>
+        <table class="table">
+          <tr>
+            <th>Date</th>
+            <th>Id</th>
+            <th>Client</th>
+            <th>Email Client</th>
+            <th>Prix Total</th>
+            <th>Etat</th>
+            <th>Editer</th>
+          </tr>
+            {% for commande in commandes %}
+						{% if commande.state == 'pending' %}
+              <tr class="danger">
+						{% elseif commande.state == 'shipped' %}
+							<tr class="warning">
+						{% else %}
+							<tr class="">
+						{% endif %}
+
+                <td>{{ commande.getCreatedAt().format('d/m/Y \à H \\h i') }} </td>
+                <td>{{ commande.id }} </td>
+                <td>{{ commande.customer.firstName ~ ' ' ~ commande.customer.lastName }} </td>
+                <td>{{ commande.customer.email }} </td>
+                <td> TODO </td>
+                <td>{{ commande.state }}</td>
+                <td>
+                  <a type="button" class="btn btn-primary" aria-label="Edit" href="{{ path("admin_commande_edit", {"id": commande.id}) }}">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+        </table>
+
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- DG -->
+
+{% endblock %}

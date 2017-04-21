@@ -126,4 +126,32 @@ class Commande
     {
         return $this->created_at;
     }
+    /**
+     * @var string
+     */
+    private $state;
+
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return Commande
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
 }

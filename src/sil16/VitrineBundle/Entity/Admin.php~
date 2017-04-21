@@ -5,9 +5,9 @@ namespace sil16\VitrineBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Customer
+ * Admin
  */
-class Customer
+class Admin
 {
     /**
      * @var integer
@@ -34,23 +34,11 @@ class Customer
      */
     private $password;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $commandes;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -61,7 +49,7 @@ class Customer
      * Set firstname
      *
      * @param string $firstname
-     * @return Customer
+     * @return Admin
      */
     public function setFirstname($firstname)
     {
@@ -73,7 +61,7 @@ class Customer
     /**
      * Get firstname
      *
-     * @return string
+     * @return string 
      */
     public function getFirstname()
     {
@@ -84,7 +72,7 @@ class Customer
      * Set lastname
      *
      * @param string $lastname
-     * @return Customer
+     * @return Admin
      */
     public function setLastname($lastname)
     {
@@ -96,7 +84,7 @@ class Customer
     /**
      * Get lastname
      *
-     * @return string
+     * @return string 
      */
     public function getLastname()
     {
@@ -104,20 +92,10 @@ class Customer
     }
 
     /**
-     * Get FullName
-     *
-     * @return string
-     */
-    public function getFullName()
-    {
-        return (strtoupper($this->getLastname()). ' ' .$this->getFirstname());
-    }
-
-    /**
      * Set email
      *
      * @param string $email
-     * @return Customer
+     * @return Admin
      */
     public function setEmail($email)
     {
@@ -129,7 +107,7 @@ class Customer
     /**
      * Get email
      *
-     * @return string
+     * @return string 
      */
     public function getEmail()
     {
@@ -140,7 +118,7 @@ class Customer
      * Set password
      *
      * @param string $password
-     * @return Customer
+     * @return Admin
      */
     public function setPassword($password)
     {
@@ -152,43 +130,10 @@ class Customer
     /**
      * Get password
      *
-     * @return string
+     * @return string 
      */
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * Add commandes
-     *
-     * @param \sil16\VitrineBundle\Entity\Commande $commandes
-     * @return Customer
-     */
-    public function addCommande(\sil16\VitrineBundle\Entity\Commande $commandes)
-    {
-        $this->commandes[] = $commandes;
-
-        return $this;
-    }
-
-    /**
-     * Remove commandes
-     *
-     * @param \sil16\VitrineBundle\Entity\Commande $commandes
-     */
-    public function removeCommande(\sil16\VitrineBundle\Entity\Commande $commandes)
-    {
-        $this->commandes->removeElement($commandes);
-    }
-
-    /**
-     * Get commandes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCommandes()
-    {
-        return $this->commandes;
     }
 }

@@ -1,0 +1,49 @@
+{% extends "sil16AdminBundle::layout.html.twig" %}
+
+{% block title %} Edition commande n° {{ commande.id }} {% endblock %}
+{% block h1 %} Edition commande n° </br> {{ commande.id }} {% endblock %}
+
+{% block content %}
+
+<div id="dg">
+  <div class="container">
+    <div class="row centered">
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <a class="btn btn-default" href="{{ path('admin_commande_index') }}"> Retour Commandes</a>
+        </div>
+      </div>
+      {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
+        <div class="form-group">
+          {{ form_label(edit_form.created_at, "Date", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+          <div class="col-sm-4">
+            {{ form_widget(edit_form.created_at, {'attr': {'class': 'form-control'}}) }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form_label(edit_form.customer, "Client", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+          <div class="col-sm-4">
+            {{ form_widget(edit_form.customer, {'attr': {'class': 'form-control'}}) }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form_label(edit_form.state, "Etat", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+          <div class="col-sm-4">
+            {{ form_widget(edit_form.state, {'attr': {'class': 'form-control'}}) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <input type="submit" value="Editer" class="btn btn-primary form-control">
+          </div>
+
+        </div>
+
+        {{ form_end(edit_form) }}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

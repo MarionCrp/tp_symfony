@@ -7,6 +7,10 @@ sil16_admin_product:
     resource: "@sil16AdminBundle/Resources/config/routing/product.yml"
     prefix:   /produits
 
+sil16_admin_commande:
+    resource: "@sil16AdminBundle/Resources/config/routing/commande.yml"
+    prefix:   /commandes
+
 # DASHBOARD
 admin_dashboard:
     path:     /

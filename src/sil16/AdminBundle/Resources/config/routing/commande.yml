@@ -1,0 +1,19 @@
+admin_commande_index:
+    path:     /
+    defaults: { _controller: "sil16AdminBundle:Commande:index" }
+    methods:  GET
+
+# admin_commande_show:
+#     path:     /{id}/show
+#     defaults: { _controller: "sil16AdminBundle:Commande:show" }
+#     methods:  GET
+
+admin_commande_new:
+    path:     /new
+    defaults: { _controller: "sil16AdminBundle:Commande:new" }
+    methods:  [GET, POST]
+
+admin_commande_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "sil16AdminBundle:Commande:edit" }
+    methods:  [GET, POST]

@@ -10,6 +10,8 @@ sil16\VitrineBundle\Entity\Commande:
     created_at:
       type: datetime
       columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    state:
+      type: string
   manyToOne:
     customer:
       targetEntity: Customer
