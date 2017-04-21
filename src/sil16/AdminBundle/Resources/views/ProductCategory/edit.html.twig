@@ -1,23 +1,38 @@
 {% extends "sil16AdminBundle::layout.html.twig" %}
 
-{% block title %} Toto {% endblock %}
+{% block title %} Edition produit {% endblock %}
+{% block h1 %} Edition : </br> '{{ product_category.name }}' {% endblock %}
 
 {% block content %}
-    <h1>Productcategory edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+<div id="dg">
+  <div class="container">
+    <div class="row centered">
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_product_category_index') }}">Back to the list</a>
-        </li>
-        <li>
+      {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
+        <div class="form-group">
+          {{ form_label(edit_form.name, "Libellé", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+          <div class="col-sm-4">
+            {{ form_widget(edit_form.name, {'attr': {'class': 'form-control'}}) }}
+          </div>
+          <div class="col-sm-1">
+            <input type="submit" value="Editer" class="btn btn-primary form-control">
+          </div>
+          {{ form_end(edit_form) }}
+          <div class="col-sm-1">
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <button type="submit" value="Supprimer" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cette categorie ?')">
+                   <span class="glyphicon glyphicon-trash"></span>  Supprimer
+                </button>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+          </div>
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <a class="btn btn-default" href="{{ path('admin_product_category_index') }}">Annuler</a>
+        </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}
