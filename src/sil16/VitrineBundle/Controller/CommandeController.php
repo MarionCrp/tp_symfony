@@ -14,7 +14,8 @@ class CommandeController extends Controller
       $current_customer = $this->findCurrentCustomer();
       $commandes = [];
       if($current_customer){
-        $commandes = $current_customer->getCommandes();
+        $em = $this->getDoctrine()->getManager();
+        $commandes = $em->getRepository('sil16VitrineBundle:Commande')->findByUserOrderedByCreatedAt($current_customer->getId(), "DESC");
       }
       return $this->render('sil16VitrineBundle:Commande:index.html.twig', array('commandes' => $commandes));
     }

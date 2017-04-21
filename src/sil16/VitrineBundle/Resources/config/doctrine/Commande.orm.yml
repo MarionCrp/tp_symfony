@@ -1,5 +1,6 @@
 sil16\VitrineBundle\Entity\Commande:
   type: entity
+  repositoryClass: sil16\VitrineBundle\Entity\CommandeRepository
   table: commande
   id:
     id:

@@ -19,8 +19,7 @@ class CommandeController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $commandes = $em->getRepository('sil16VitrineBundle:Commande')->findAll();
+        $commandes = $em->getRepository('sil16VitrineBundle:Commande')->findAllOrderedByCreatedAt("DESC");
 
         return $this->render('sil16AdminBundle:Commande:index.html.twig', array(
             'commandes' => $commandes,
