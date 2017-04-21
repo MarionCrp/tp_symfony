@@ -1,19 +1,19 @@
 {% extends "sil16AdminBundle::layout.html.twig" %}
 
 {% block title %} Edition produit {% endblock %}
-{% block h1 %} Edition : </br> '{{ product_category.name }}' {% endblock %}
+{% block h1 %} Edition : </br> '{{ product.name }}' {% endblock %}
 
 {% block content %}
 
 <div id="dg">
   <div class="container">
     <div class="row centered">
-      {% include 'sil16AdminBundle:ProductCategory:_form.html.twig' with {'form': edit_form, 'submit_label': 'Editer'}  %}
+      {% include 'sil16AdminBundle:Product:_form.html.twig' with {'form': edit_form, 'submit_label': 'Editer'}  %}
       <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
           {{ form_start(delete_form) }}
-              <button type="submit" value="Supprimer" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cette categorie ?')">
+              <button type="submit" value="Supprimer" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">
                  <span class="glyphicon glyphicon-trash"></span>
                  Supprimer
               </button>

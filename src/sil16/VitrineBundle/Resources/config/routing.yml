@@ -1,7 +1,3 @@
-admin:
-  resource: "@sil16AdminBundle/Resources/config/routing.yml"
-  prefix: /admin
-
 # STATIC PAGES
 sil16_vitrine_accueil:
     path:     /accueil/{name}

@@ -36,3 +36,12 @@ th, td {
 .row.content {
   margin-top: 90px;
 }
+
+.btn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.table {
+  background-color: white;
+}

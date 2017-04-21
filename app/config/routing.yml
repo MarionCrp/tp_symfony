@@ -1,6 +1,6 @@
 sil16_admin:
     resource: "@sil16AdminBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /admin
 
 sil16_vitrine:
     resource: "@sil16VitrineBundle/Resources/config/routing.yml"

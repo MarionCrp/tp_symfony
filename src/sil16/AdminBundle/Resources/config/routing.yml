@@ -1,7 +1,11 @@
 ### ADMIN SESSION ###########################################################
-sil16_vitrine_productcategory:
+sil16_admin_product_category:
     resource: "@sil16AdminBundle/Resources/config/routing/product_category.yml"
     prefix:   /categories
+
+sil16_admin_product:
+    resource: "@sil16AdminBundle/Resources/config/routing/product.yml"
+    prefix:   /produits
 
 # DASHBOARD
 admin_dashboard:

@@ -1,0 +1,23 @@
+{% extends "sil16AdminBundle::layout.html.twig" %}
+{% block title %} Ajout - Nouvel catégorie de produit {% endblock %}
+{% block h1 %} Ajouter une nouvelle catégorie de produit {% endblock %}
+
+{% block content %}
+
+	<div id="dg">
+		<div class="container">
+      <div class="row centered">
+        <br>
+        <div id="dg">
+          <div class="container">
+            <div class="row centered">
+
+            {% include 'sil16AdminBundle:Product:_form.html.twig' with {'form': form, 'submit_label': 'Ajouter'}  %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
