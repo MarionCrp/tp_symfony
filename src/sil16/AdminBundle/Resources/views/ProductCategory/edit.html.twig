@@ -8,29 +8,18 @@
 <div id="dg">
   <div class="container">
     <div class="row centered">
-
-      {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
-        <div class="form-group">
-          {{ form_label(edit_form.name, "Libellé", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
-          <div class="col-sm-4">
-            {{ form_widget(edit_form.name, {'attr': {'class': 'form-control'}}) }}
-          </div>
-          <div class="col-sm-1">
-            <input type="submit" value="Editer" class="btn btn-primary form-control">
-          </div>
-          {{ form_end(edit_form) }}
-          <div class="col-sm-1">
-            {{ form_start(delete_form) }}
-                <button type="submit" value="Supprimer" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cette categorie ?')">
-                   <span class="glyphicon glyphicon-trash"></span>  Supprimer
-                </button>
-            {{ form_end(delete_form) }}
-          </div>
-        </div>
+      {% include 'sil16AdminBundle:ProductCategory:_form.html.twig' with {'form': edit_form, 'submit_label': 'Editer'}  %}
+      <div class="row">
         <div class="col-sm-4"></div>
-        <div class="col-sm-4">
-          <a class="btn btn-default" href="{{ path('admin_product_category_index') }}">Annuler</a>
+        <div class="col-sm-4" style="margin-top: 10px;">
+          {{ form_start(delete_form) }}
+              <button type="submit" value="Supprimer" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cette categorie ?')">
+                 <span class="glyphicon glyphicon-trash"></span>
+                 Supprimer
+              </button>
+          {{ form_end(delete_form) }}
         </div>
+      </div>
 
     </div>
   </div>

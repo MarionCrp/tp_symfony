@@ -3,10 +3,10 @@ admin_product_category_index:
     defaults: { _controller: "sil16AdminBundle:ProductCategory:index" }
     methods:  GET
 
-admin_product_category_show:
-    path:     /{id}/show
-    defaults: { _controller: "sil16AdminBundle:ProductCategory:show" }
-    methods:  GET
+# admin_product_category_show:
+#     path:     /{id}/show
+#     defaults: { _controller: "sil16AdminBundle:ProductCategory:show" }
+#     methods:  GET
 
 admin_product_category_new:
     path:     /new

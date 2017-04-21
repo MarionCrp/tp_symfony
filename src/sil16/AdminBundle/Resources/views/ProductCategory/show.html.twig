@@ -1,0 +1,43 @@
+{% extends "sil16AdminBundle::layout.html.twig" %}
+
+{% block title %} Catégorie : {{ product_category.name }} {% endblock %}
+{% block h1 %} Catégorie : {{ product_category.name }} {% endblock %}
+
+{% block content %}
+
+<div id="dg">
+  <div class="container">
+    <div class="row centered">
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product_category.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ product_category.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_product_category_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_product_category_edit', { 'id': product_category.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+
+		</div><!-- row -->
+	</div><!-- container -->
+</div><!-- DG -->
+
+{% endblock %}

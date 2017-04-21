@@ -42,7 +42,7 @@ class ProductCategoryController extends Controller
             $em->persist($product_category);
             $em->flush($product_category);
 
-            return $this->redirectToRoute('admin_product_category_show', array('id' => $product_category->getId()));
+            return $this->redirectToRoute('admin_product_category_edit', array('id' => $product_category->getId()));
         }
 
         return $this->render('sil16AdminBundle:ProductCategory:new.html.twig', array(
@@ -50,20 +50,20 @@ class ProductCategoryController extends Controller
             'form' => $form->createView(),
         ));
     }
-
-    /**
-     * Finds and displays a productCategory entity.
-     *
-     */
-    public function showAction(ProductCategory $product_category)
-    {
-        $deleteForm = $this->createDeleteForm($product_category);
-
-        return $this->render('sil16AdminBundle:ProductCategory:show.html.twig', array(
-            'product_category' => $product_category,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
+    //
+    // /**
+    //  * Finds and displays a productCategory entity.
+    //  *
+    //  */
+    // public function showAction(ProductCategory $product_category)
+    // {
+    //     $deleteForm = $this->createDeleteForm($product_category);
+    //
+    //     return $this->render('sil16AdminBundle:ProductCategory:show.html.twig', array(
+    //         'product_category' => $product_category,
+    //         'delete_form' => $deleteForm->createView(),
+    //     ));
+    // }
 
     /**
      * Displays a form to edit an existing productCategory entity.
