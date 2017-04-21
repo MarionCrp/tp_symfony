@@ -1,18 +1,16 @@
 {% extends "sil16VitrineBundle::layout.html.twig" %}
 
 {% block title %} Accueil {% endblock %}
+{% block h1 %} Bonjour {{ name }}! {% endblock %}
 
 {% block content %}
 
-  <div id="headerwrap">
-    <div class="container">
-      <div class="row centered">
-        <div class="col-lg-8 col-lg-offset-2">
-          <h1> Bonjour {{ name }}! </h1>
-          <p> Bienvenue sur mon site e-commerce ! </p>
-        </div>
-      </div><!-- row -->
-    </div><!-- container -->
-  </div><!-- headerwrap -->
+<div id="dg">
+  <div class="container">
+    <div class="row centered">
+      <p> Bienvenue sur mon site de e-commerce ! </p>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
