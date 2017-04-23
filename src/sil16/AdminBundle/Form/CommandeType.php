@@ -5,6 +5,7 @@ namespace sil16\AdminBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CommandeType extends AbstractType
 {
@@ -19,7 +20,12 @@ class CommandeType extends AbstractType
           'multiple' => false,
           'label' => 'Client'
           )
-        )->add('state')->add('created_at', 'date', ['widget' => 'single_text', 'format' => 'dd-MM-yyyy']);
+        )->add('state', 'choice', array(
+            'label' => 'Etat',
+            'multiple' => false,
+            'choices' => array('pending' => "En attente de paiement", 'paid' => "Payé", 'send' => "Expédié")
+          )
+        )->add('created_at', 'date', ['widget' => 'single_text', 'format' => 'dd-MM-yyyy']);
     }
 
     /**

@@ -45,3 +45,17 @@ th, td {
 .table {
   background-color: white;
 }
+
+/* FORM ERRORS STYLE */
+.form_errors {
+  color: red;
+  font-weight: bold;
+}
+
+.form_errors ul {
+  padding: 0;
+  list-style-type: none;
+}
+.form_errors li {
+  text-align: left;
+}

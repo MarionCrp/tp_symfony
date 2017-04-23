@@ -33,6 +33,7 @@ class CommandeController extends Controller
         if(!empty($basket->getContent())){
           $new_commande = new Commande();
           $new_commande->setCustomer($current_customer);
+          $new_commande->setState('pending');
           foreach($basket->getContent() as $product_id => $quantity){
             $product = $this->findProduct($product_id);
             // On vérifie que le produit existe et que le stock suffise

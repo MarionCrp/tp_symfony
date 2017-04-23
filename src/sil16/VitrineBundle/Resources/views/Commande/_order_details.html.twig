@@ -1,4 +1,5 @@
-<h2>Commande du {{ commande.getCreatedAt().format('d/m/Y \à H \\h i') }}.</h2>
+<h2>Commande du {{ commande.getCreatedAt().format('d/m/Y \à H \\h i') }}</h2>
+<h3>{{ commande.state() == null ? "Etat inconnu" : commande.getTranslatedState() }}</h3>
 <table class="table table-hover">
    <thead>
       <tr>

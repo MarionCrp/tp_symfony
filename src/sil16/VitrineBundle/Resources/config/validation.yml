@@ -1,0 +1,25 @@
+sil16\VitrineBundle\Entity\Commande:
+  properties:
+    state:
+      - NotBlank: ~
+
+sil16\VitrineBundle\Entity\Customer:
+  properties:
+    firstname:
+      - Length:
+          max: 30
+          maxMessage: Votre prénom est trop long (maximum 30 caractères)
+    lastname:
+      - NotBlank: ~
+      - Length:
+          max: 30
+          maxMessage: Votre nom est trop long (maximum 30 caractères)
+    email:
+      - Email:
+          message: L'email {{ value }} n'est pas valide.
+    password:
+      - Length:
+          min: 6
+          max: 50
+          minMessage: "Votre mot de passe doit contenir au moins 6 caractères"
+          maxMessage: "Votre mot de passe est trop long (maximum 50 caractères)"

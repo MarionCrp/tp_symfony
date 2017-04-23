@@ -21,11 +21,7 @@ class CommandeRepository extends EntityRepository
                 ->getResult();
     }
 
-      public function findAllOrderedByCreatedAt($order="DESC", $customer_id) {
-          // return $this->getEntityManager()
-          //             ->createQuery('select c from sil16VitrineBundle:Commande c ORDER BY c.created_at :order')
-          //             ->setParameters(array('order' => $order))
-          //             ->getResult();
+      public function findAllOrderedByCreatedAt($order="DESC") {
           $qb = $this->createQueryBuilder('c');
           return $qb->orderBy('c.created_at', $order)
                     ->getQuery()

@@ -48,11 +48,11 @@ class CustomerController extends Controller
          ->getForm();
 
      $form->handleRequest($request);
-
-     if ($form->isSubmitted() && $form->isValid()) {
+     if ($form->isSubmitted()) {
          $logging_in_customer = $form->getData();
          $em = $this->getDoctrine()->getManager();
          $customer = $this->getCustomerByEmail($logging_in_customer->getEmail());
+
          if($customer){
             // On compare les mots de passe.
             if($customer->getPassword() == $logging_in_customer->getPassword()){
