@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
+
+  const LIMITED_STOCK = 10;
     /**
      * @var integer
      */

@@ -4,6 +4,7 @@ namespace sil16\AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductType extends AbstractType
@@ -19,7 +20,7 @@ class ProductType extends AbstractType
           'multiple' => false,
           'label' => 'Catégorie'
           )
-        )->add('price')->add('description')->add('stock');
+        )->add('price')->add('description',TextareaType::class, array('required' => false))->add('stock');
     }
 
     /**

@@ -23,9 +23,9 @@ class CommandeType extends AbstractType
         )->add('state', 'choice', array(
             'label' => 'Etat',
             'multiple' => false,
-            'choices' => array('pending' => "En attente de paiement", 'paid' => "Payé", 'send' => "Expédié")
-          )
-        )->add('created_at', 'date', ['widget' => 'single_text', 'format' => 'dd-MM-yyyy']);
+            'choices' => array('pending' => "En attente de paiement", 'paid' => "Payé", 'send' => "Expédié"),
+            'data' => $builder->getData()->getState() # Set commande state by default
+          ));
     }
 
     /**

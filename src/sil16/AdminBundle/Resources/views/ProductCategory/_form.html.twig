@@ -1,17 +1,17 @@
+<a class="btn btn-default" href="{{ path('admin_product_category_index') }}">Retour Catégorie</a>
 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
   <div class="form-group">
     {{ form_label(form.name, "Libellé", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
     <div class="col-sm-4">
       {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
     </div>
-    <div class="col-sm-1">
+    <div class="col-sm-4 form_errors">{{ form_errors(form.name) }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5"></div>
+    <div class="col-sm-2">
       <input type="submit" value="{{ submit_label }}" class="btn btn-primary form-control">
     </div>
   </div>
   {{ form_end(form) }}
-  <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-      <a class="btn btn-default" href="{{ path('admin_product_category_index') }}">Retour Catégorie</a>
-    </div>
-  </div>

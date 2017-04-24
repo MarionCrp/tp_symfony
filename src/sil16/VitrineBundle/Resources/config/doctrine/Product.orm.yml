@@ -16,6 +16,7 @@ sil16\VitrineBundle\Entity\Product:
       scale: 2
     description:
       type: text
+      nullable: true
     stock:
       type: integer
 

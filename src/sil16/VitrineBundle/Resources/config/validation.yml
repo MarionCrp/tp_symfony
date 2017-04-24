@@ -1,8 +1,3 @@
-sil16\VitrineBundle\Entity\Commande:
-  properties:
-    state:
-      - NotBlank: ~
-
 sil16\VitrineBundle\Entity\Customer:
   properties:
     firstname:
@@ -23,3 +18,42 @@ sil16\VitrineBundle\Entity\Customer:
           max: 50
           minMessage: "Votre mot de passe doit contenir au moins 6 caractères"
           maxMessage: "Votre mot de passe est trop long (maximum 50 caractères)"
+
+sil16\VitrineBundle\Entity\Commande:
+  properties:
+    state:
+      - NotBlank: { message: L'état n'est pas valide }
+
+sil16\VitrineBundle\Entity\Product:
+  properties:
+    name:
+      - NotBlank: { message:  Veuillez renseigner un nom de produit }
+      - Length:
+          max: 40
+          maxMessage: Le nom du produit est trop long (40 caractères maximum)
+    description:
+      - Length:
+          max: 150
+          maxMessage: La description du produit est trop longue (150 caractères maximum)
+    price:
+      - Type:
+          type: float
+          message: Veuillez entrer une valeur valide
+      - GreaterThanOrEqual:
+          value: 0
+          message: Le prix ne peut être une valeur négative
+    stock:
+      - Type:
+          type: integer
+          message: Veuillez entrer une valeur valide
+      - GreaterThanOrEqual:
+          value: 0
+          message: Le stock ne peut être une valeur négative
+
+sil16\VitrineBundle\Entity\ProductCategory:
+  properties:
+    name:
+      - NotBlank: { message:  Veuillez renseigner un nom pour la catégorie }
+      - Length:
+          max: 40
+          maxMessage: Le nom de la catégorie est trop long (40 caractères maximum)

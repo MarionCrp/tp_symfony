@@ -2,9 +2,10 @@
 
 namespace sil16\AdminBundle\Controller;
 
-use sil16\VitrineBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use sil16\VitrineBundle\Entity\Product;
+use sil16\VitrineBundle\Entity\ProductCategory;
 
 /**
  * Product controller.
@@ -16,14 +17,32 @@ class ProductController extends Controller
      * Lists all productCategory entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $products = $em->getRepository('sil16VitrineBundle:Product')->findAll();
+        $category_id_requested = $request->query->get('by_product_category_id');
+
+        $products = [];
+        // Si il ya un filtre par catégorie, on vérifie que la catégorie existe et on récpère ses produits.
+        // Sinon on affiche tous les produits
+        if($category_id_requested){
+          $product_category = $em->getRepository('sil16VitrineBundle:ProductCategory')->find($category_id_requested);
+          if($product_category){
+            $products = $product_category->getProducts();
+          }
+        }
+
+        if(!$products){
+          $products = $em->getRepository('sil16VitrineBundle:Product')->findAll();
+        }
+
+
+        $product_categories = $em->getRepository('sil16VitrineBundle:ProductCategory')->findAll();
 
         return $this->render('sil16AdminBundle:Product:index.html.twig', array(
             'products' => $products,
+            'product_categories' => $product_categories,
         ));
     }
 

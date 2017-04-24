@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Commande
 {
+  const STATES = ['pending', 'paid', 'send'];
+
     /**
      * @var integer
      */
@@ -140,6 +142,9 @@ class Commande
      */
     public function setState($state)
     {
+        if (!in_array($state, self::STATES)) {
+           throw new \InvalidArgumentException("Le statut n'est pas valide");
+        }
         $this->state = $state;
 
         return $this;
@@ -148,10 +153,27 @@ class Commande
     /**
      * Get state
      *
-     * @return string 
+     * @return string
      */
     public function getState()
     {
         return $this->state;
+    }
+
+    public function getTranslatedState(){
+      switch($this->state) {
+        case 'pending':
+          return "En attente de payment";
+          break;
+        case 'paid':
+          return "Payé";
+          break;
+        case 'send':
+          return "Envoyé";
+          break;
+        default:
+          return "-";
+          break;
+      }
     }
 }

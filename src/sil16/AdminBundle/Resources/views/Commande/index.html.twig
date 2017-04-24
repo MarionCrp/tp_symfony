@@ -21,9 +21,11 @@
           </tr>
             {% for commande in commandes %}
 						{% if commande.state == 'pending' %}
-              <tr class="danger">
-						{% elseif commande.state == 'shipped' %}
-							<tr class="warning">
+              <tr class="warning">
+						{% elseif commande.state == 'paid' %}
+							<tr class="danger">
+						{% elseif commande.state == 'send' %}
+							<tr class="success">
 						{% else %}
 							<tr class="">
 						{% endif %}
