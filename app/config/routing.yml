@@ -9,3 +9,11 @@ sil16_vitrine:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+# login:
+#   pattern: /login
+#   defaults: { _controller: sil16VitrineBundle:Security:connexion }
+# connexion_check:
+#   pattern: /connexion_check
+# logout:
+#   pattern: /deconnexion

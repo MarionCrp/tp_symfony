@@ -6,40 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use sil16\VitrineBundle\Entity\Customer;
 
-class CustomerController extends Controller
+class SessionController extends Controller
 {
-    public function newAction(Request $request) {
-      $customer = new Customer();
-      $form = $this->createFormBuilder($customer)
-         ->add('email', 'text')
-         ->add('firstname', 'text')
-         ->add('lastname', 'text')
-         ->add('password', 'password')
-         ->add('submit', 'submit')
-         ->getForm();
-
-     $form->handleRequest($request);
-     if ($form->isSubmitted() && $form->isValid()) {
-         $new_customer = $form->getData();
-         $em = $this->getDoctrine()->getManager();
-         if($this->getCustomerByEmail($new_customer->getEmail())){
-           $this->addFlash('danger', "Un compte existe déjà avec cette adresse email");
-           return $this->redirectToRoute('sil16_vitrine_subscription');
-         } else {
-          // Ajout dans la BDD
-         $em->persist($new_customer);
-         $em->flush();
-
-         // Mise en session
-         $this->createSession($this->getCustomerByEmail($new_customer->getEmail()));
-         $this->addFlash('success', "Votre compte a bien été créé");
-         return $this->redirectToRoute('sil16_vitrine_accueil');
-       }
-     }
-      return $this->render('sil16VitrineBundle:Customer:new.html.twig', array('customer' => $customer, 'form' => $form->createView()));
-    }
-
-    public function logInAction(Request $request){
+    public function newAction(Request $request){
       $customer = new Customer();
       $form = $this->createFormBuilder($customer)
          ->add('email', 'text')

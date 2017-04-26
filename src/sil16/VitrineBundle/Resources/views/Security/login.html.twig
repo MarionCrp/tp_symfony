@@ -1,0 +1,42 @@
+{% extends "sil16VitrineBundle::layout.html.twig" %}
+
+{% block title %} Connexion - Mes Lampes {% endblock %}
+{% block h1 %} Connexion {% endblock %}
+
+{% block content %}
+
+  <div id="dg">
+    <div class="container">
+      <div class="row centered">
+        <br>
+        {% if error %}
+          <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <form action="{{ path('login') }}" method="post" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="email">Email :</label>
+            <div class="col-sm-4">
+              <input type="text" id="username" name="_username" value="{{ last_email }}" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="password">Mot de passe :</label>
+            <div class="col-sm-4">
+              <input type="password" id="password" name="_password" class="form-control"/>
+            </div>
+          </div>
+          {# Pour controler l'URL vers laquelle l'utilisateur est redirigé en cas de succès #}
+            <input type="hidden" name="_target_path" value="/monCompte" />
+
+          <div class="form-group">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+              <input type="hidden" name="_target_path" value="/accueil" />
+              <button type="submit" class="btn btn-primary">Se Connecter</button>
+            </div>
+          </div>
+        </form>
+      </div><!-- row -->
+    </div><!-- container -->
+  </div><!-- DG -->
+{% endblock %}

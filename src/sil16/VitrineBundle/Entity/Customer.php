@@ -3,12 +3,36 @@
 namespace sil16\VitrineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Customer
  */
-class Customer
+class Customer implements UserInterface, \Serializable
 {
+
+    public function getUsername() {
+        return $this->email; // l'email est utilisé comme login
+    }
+
+    public function getSalt() {
+        return null; // inutile avec l’encryptage choisi
+    }
+
+    public function getRoles() {
+        return array('ROLE_CUSTOMER'); // sinon le rôle USER
+    }
+
+    public function eraseCredentials(){// rien à faire ici
+    }
+
+    public function serialize() { // pour pouvoir sérialiser le Client en session
+        return serialize(array($this->id));
+    }
+
+    public function unserialize($serialized) {
+        list ($this->id) = unserialize($serialized);
+    }
+
     /**
      * @var integer
      */

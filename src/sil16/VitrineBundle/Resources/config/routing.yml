@@ -11,12 +11,12 @@ sil16_vitrine_mentions:
 # INSCRIPTION
 sil16_vitrine_subscription:
     path:     /inscription
-    defaults: { _controller: sil16VitrineBundle:Customer:new }
+    defaults: { _controller: sil16VitrineBundle:Registration:new }
 
 # CONNEXION
-sil16_vitrine_login:
-    path:     /connexion
-    defaults: { _controller: sil16VitrineBundle:Customer:logIn }
+login:
+    path:     /login
+    defaults: { _controller: sil16VitrineBundle:Security:logIn }
 
 # DECONNEXION
 sil16_vitrine_logout:
