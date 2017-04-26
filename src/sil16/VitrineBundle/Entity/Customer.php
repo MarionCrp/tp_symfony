@@ -19,6 +19,9 @@ class Customer implements UserInterface, \Serializable
     }
 
     public function getRoles() {
+      if ($this->isAdministrateur()) // Si le client est administrateur
+        return array('ROLE_ADMIN'); // on lui accorde le rôle ADMIN
+      else
         return array('ROLE_CUSTOMER'); // sinon le rôle USER
     }
 

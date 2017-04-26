@@ -20,7 +20,7 @@
            Mon Panier
         </a>
       </li>
-      {% if app.session.get('customer_id') == null %}
+      {% if app.user == null %}
         <li>
           <a href="{{ path('sil16_vitrine_subscription') }}">
              S'inscrire
@@ -38,7 +38,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ path('sil16_vitrine_logout') }}">
+          <a href="{{ path('logout') }}">
              Se déconnecter
           </a>
         </li>

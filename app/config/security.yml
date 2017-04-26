@@ -6,15 +6,22 @@ security:
             # algorithm: bcrypt
             # cost: 12
     role_hierarchy:
-        ROLE_ADMIN: ROLE_CUSTOMER
+        # ROLE_ADMIN: ROLE_CUSTOMER
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         customers:
             entity: { class: sil16VitrineBundle:Customer, property: email }
 
-        # in_memory:
-        #     memory: ~
+        in_memory:
+            memory:
+              users:
+                  customer:
+                      password:   password
+                      roles:      'ROLE_CUSTOMER'
+                  admin@email.com:
+                      password:   password
+                      roles:      [ROLE_CUSTOMER, ROLE_ADMIN]
 
     firewalls:
         vitrine_area:
@@ -24,8 +31,9 @@ security:
                 login_path: login
                 check_path: login
             logout:
-                path: deconnexion
+                path: /logout
                 target: /accueil
+
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -42,5 +50,6 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
     access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/mon-compte, roles: ROLE_CUSTOMER }

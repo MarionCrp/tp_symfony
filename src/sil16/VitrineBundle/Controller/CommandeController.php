@@ -28,7 +28,7 @@ class CommandeController extends Controller
       $current_customer = $this->findCurrentCustomer();
       if(!$current_customer){
         $this->addFlash('danger', "Vous devez être connecté pour commander");
-        return $this->redirect($this->generateUrl('sil16_vitrine_login'));
+        return $this->redirect($this->generateUrl('login'));
       } else {
         if(!empty($basket->getContent())){
           $new_commande = new Commande();

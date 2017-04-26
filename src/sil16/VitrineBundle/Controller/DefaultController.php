@@ -8,6 +8,8 @@ class DefaultController extends Controller
 {
     public function indexAction($name)
     {
+      $user = $this->getUser(); // C’est un objet de la classe Client !
+
         $current_customer = $this->findCurrentCustomer();
         if($current_customer){
           $name = $current_customer->getFirstname();

@@ -1,6 +1,6 @@
 # STATIC PAGES
 sil16_vitrine_accueil:
-    path:     /accueil/{name}
+    path:     /
     defaults: { _controller: sil16VitrineBundle:Default:index, name: "visiteur" }
 
 sil16_vitrine_mentions:
@@ -19,9 +19,8 @@ login:
     defaults: { _controller: sil16VitrineBundle:Security:logIn }
 
 # DECONNEXION
-sil16_vitrine_logout:
-    path:     /deconnexion
-    defaults: { _controller: sil16VitrineBundle:Customer:destroyCustomerSession }
+logout:
+  path: /logout
 
 ### CATALOGUE ##################################################################
 # CATEGORIES
