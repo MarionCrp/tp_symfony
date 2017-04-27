@@ -97,6 +97,11 @@ class CommandeController extends Controller
 
     // Détail d'une commande
     public function showAction($commande_id){
+      if (!$this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER')) {
+        $message = 'Vous devez être connecté pour accéder à cette page';
+        return $this->redirectToRoute('render_with_access_denied_errors', array('message' => $message, 'route' => 'login'));
+      }
+
       $commande = $this->findCommande($commande_id);
       if($commande){
         return $this->render('sil16VitrineBundle:Commande:show.html.twig', array('commande' => $commande));
@@ -105,7 +110,7 @@ class CommandeController extends Controller
       }
     }
 
-    // Fonction de
+    // Récupérer un produit dans la base de donnée
     private function findProduct($product_id){
       $product_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Product');
       if($product_id){
@@ -118,6 +123,7 @@ class CommandeController extends Controller
       }
     }
 
+    // Récupérer une commande dans la base de données
     private function findCommande($commande_id){
       $commande_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Commande');
       if($commande_id){

@@ -18,6 +18,10 @@ class ProductCategoryController extends Controller
      */
     public function indexAction()
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
         $em = $this->getDoctrine()->getManager();
 
         $product_categories = $em->getRepository('sil16VitrineBundle:ProductCategory')->findAll();
@@ -33,6 +37,10 @@ class ProductCategoryController extends Controller
      */
     public function newAction(Request $request)
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
         $product_category = new ProductCategory();
         $form = $this->createForm('sil16\AdminBundle\Form\ProductCategoryType', $product_category);
         $form->handleRequest($request);
@@ -41,8 +49,8 @@ class ProductCategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($product_category);
             $em->flush($product_category);
-
-            return $this->redirectToRoute('admin_product_category_edit', array('id' => $product_category->getId()));
+            $this->addFlash('success', "La catégorie a été ajoutée avec succès");
+            return $this->redirectToRoute('admin_product_category_index');
         }
 
         return $this->render('sil16AdminBundle:ProductCategory:new.html.twig', array(
@@ -50,20 +58,7 @@ class ProductCategoryController extends Controller
             'form' => $form->createView(),
         ));
     }
-    //
-    // /**
-    //  * Finds and displays a productCategory entity.
-    //  *
-    //  */
-    // public function showAction(ProductCategory $product_category)
-    // {
-    //     $deleteForm = $this->createDeleteForm($product_category);
-    //
-    //     return $this->render('sil16AdminBundle:ProductCategory:show.html.twig', array(
-    //         'product_category' => $product_category,
-    //         'delete_form' => $deleteForm->createView(),
-    //     ));
-    // }
+
 
     /**
      * Displays a form to edit an existing productCategory entity.
@@ -71,6 +66,10 @@ class ProductCategoryController extends Controller
      */
     public function editAction(Request $request, ProductCategory $product_category)
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
 
         $deleteForm = $this->createDeleteForm($product_category);
         $editForm = $this->createForm('sil16\AdminBundle\Form\ProductCategoryType', $product_category);
@@ -79,7 +78,7 @@ class ProductCategoryController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_product_category_edit', array('id' => $product_category->getId()));
+            return $this->redirectToRoute('admin_product_category_index');
         }
 
         return $this->render('sil16AdminBundle:ProductCategory:edit.html.twig', array(
@@ -95,15 +94,25 @@ class ProductCategoryController extends Controller
      */
     public function deleteAction(Request $request, ProductCategory $product_category)
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
+
         $form = $this->createDeleteForm($product_category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($product_category);
-            $em->flush($product_category);
-        }
 
+            if(count($product_category->getProducts()) > 0){
+              $this->addFlash('danger', "La catégorie n'a pas pu être supprimée car des produits lui sont associés");
+            } else {
+              $em = $this->getDoctrine()->getManager();
+              $em->remove($product_category);
+              $em->flush($product_category);
+              $this->addFlash('success', "La catégorie a été supprimée avec succès");
+            }
+        }
         return $this->redirectToRoute('admin_product_category_index');
     }
 

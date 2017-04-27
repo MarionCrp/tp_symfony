@@ -18,6 +18,11 @@ class CommandeController extends Controller
      */
     public function indexAction()
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $commandes = $em->getRepository('sil16VitrineBundle:Commande')->findAllOrderedByCreatedAt("DESC");
 
@@ -32,6 +37,11 @@ class CommandeController extends Controller
      */
     public function newAction(Request $request)
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
+
         $commande = new Commande();
         $form = $this->createForm('sil16\AdminBundle\Form\CommandeType', $commande);
         $form->handleRequest($request);
@@ -56,6 +66,10 @@ class CommandeController extends Controller
      */
     public function editAction(Request $request, Commande $commande)
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
 
         $editForm = $this->createForm('sil16\AdminBundle\Form\CommandeType', $commande);
         $editForm->handleRequest($request);
