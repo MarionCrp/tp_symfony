@@ -22,21 +22,34 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $category_id_requested = $request->query->get('by_product_category_id');
+        $active_state_requested = $request->query->get('by_active');
 
+        // On caste la valeur en booléen si "true"/"false"
+        if($active_state_requested === "false"){
+          $active_state_requested = false;
+        } else if($active_state_requested === "true") {
+          $active_state_requested = true;
+        }
+
+        // On initialise le tableau
         $products = [];
-        // Si il ya un filtre par catégorie, on vérifie que la catégorie existe et on récpère ses produits.
-        // Sinon on affiche tous les produits
+
+        // Filtre par catégorie et active/inactive/tous selon le paramètre envoyé.
         if($category_id_requested){
-          $product_category = $em->getRepository('sil16VitrineBundle:ProductCategory')->find($category_id_requested);
-          if($product_category){
-            $products = $product_category->getProducts();
-          }
-        }
+            if($active_state_requested === "both"){
+                $category = $em->getRepository('sil16VitrineBundle:ProductCategory')->find($category_id_requested);
+                $products = $category->getProducts();
+            } else {
+              $products = $em->getRepository('sil16VitrineBundle:Product')->findByActiveWithCategory($category_id_requested, $active_state_requested);
+            }
+        } else {
+            if($active_state_requested === "both" || $active_state_requested === null){
+              $products = $em->getRepository('sil16VitrineBundle:Product')->findAll();
+            } else {
 
-        if(!$products){
-          $products = $em->getRepository('sil16VitrineBundle:Product')->findAll();
+              $products = $em->getRepository('sil16VitrineBundle:Product')->findByActive($active_state_requested);
+            }
         }
-
 
         $product_categories = $em->getRepository('sil16VitrineBundle:ProductCategory')->findAll();
 
@@ -69,20 +82,6 @@ class ProductController extends Controller
             'form' => $form->createView(),
         ));
     }
-    //
-    // /**
-    //  * Finds and displays a productCategory entity.
-    //  *
-    //  */
-    // public function showAction(Product $product)
-    // {
-    //     $deleteForm = $this->createDeleteForm($product);
-    //
-    //     return $this->render('sil16AdminBundle:Product:show.html.twig', array(
-    //         'product' => $product,
-    //         'delete_form' => $deleteForm->createView(),
-    //     ));
-    // }
 
     /**
      * Displays a form to edit an existing productCategory entity.
@@ -91,54 +90,41 @@ class ProductController extends Controller
     public function editAction(Request $request, Product $product)
     {
 
-        $deleteForm = $this->createDeleteForm($product);
         $editForm = $this->createForm('sil16\AdminBundle\Form\ProductType', $product);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', "Le produit a été édité avec succès");
-            return $this->redirectToRoute('admin_product_edit', array('id' => $product->getId()));
+            return $this->redirectToRoute('admin_product_index');
         }
 
         return $this->render('sil16AdminBundle:Product:edit.html.twig', array(
             'product' => $product,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
     }
 
     /**
-     * Deletes a productCategory entity.
-     *
-     */
-    public function deleteAction(Request $request, Product $product)
-    {
-        $form = $this->createDeleteForm($product);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($product);
-            $em->flush($product);
-        }
-
-        return $this->redirectToRoute('admin_product_index');
-    }
-
-    /**
-     * Creates a form to delete a productCategory entity.
      *
      * @param Product $product The productCategory entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Product $product)
+    public function toggleActiveAction(Product $product)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_product_delete', array('id' => $product->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
+        $active_value = $product->getActive();
+        $product->setActive(!$active_value);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($product);
+        $em->flush($product);
+
+        if(!$active_value == true){
+          $message_value = "activé";
+        } else {
+          $message_value = "désactivé";
+        }
+        $this->addFlash('success', "Le produit a été $message_value avec succès");
+        return $this->redirectToRoute('admin_product_index');
     }
 }

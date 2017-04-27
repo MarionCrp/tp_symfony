@@ -20,7 +20,7 @@ class ProductType extends AbstractType
           'multiple' => false,
           'label' => 'Catégorie'
           )
-        )->add('price')->add('description',TextareaType::class, array('required' => false))->add('stock');
+        )->add('price')->add('description',TextareaType::class, array('required' => false))->add('stock')->add('active');
     }
 
     /**

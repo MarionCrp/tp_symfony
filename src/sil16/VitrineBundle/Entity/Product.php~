@@ -272,4 +272,32 @@ class Product
     {
         return $this->product_category;
     }
+    /**
+     * @var boolean
+     */
+    private $enable;
+
+
+    /**
+     * Set enable
+     *
+     * @param boolean $enable
+     * @return Product
+     */
+    public function setEnable($enable)
+    {
+        $this->enable = $enable;
+
+        return $this;
+    }
+
+    /**
+     * Get enable
+     *
+     * @return boolean 
+     */
+    public function getEnable()
+    {
+        return $this->enable;
+    }
 }

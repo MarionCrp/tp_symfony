@@ -272,4 +272,33 @@ class Product
     {
         return $this->product_category;
     }
+
+    /**
+     * @var boolean
+     */
+    private $active;
+
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Product
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
 }

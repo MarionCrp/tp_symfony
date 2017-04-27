@@ -10,7 +10,7 @@ class DefaultController extends Controller
     {
       $user = $this->getUser(); // C’est un objet de la classe Client !
 
-        $current_customer = $this->findCurrentCustomer();
+        $current_customer = $this->getUser();
         if($current_customer){
           $name = $current_customer->getFirstname();
         }
@@ -31,8 +31,8 @@ class DefaultController extends Controller
     }
 
 
-    public function renderWithAccessDeniedErrorsAction(){
-        $this->addFlash('success', "Vous n'êtes pas autorisé à accéder à cette page");
-        return $this->redirectToRoute('sil16_vitrine_accueil');
+    public function renderWithAccessDeniedErrorsAction($message, $route){
+        $this->addFlash('danger', $message);
+        return $this->redirectToRoute($route);
     }
 }

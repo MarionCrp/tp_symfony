@@ -3,11 +3,6 @@ admin_product_index:
     defaults: { _controller: "sil16AdminBundle:Product:index" }
     methods:  GET
 
-# admin_product_show:
-#     path:     /{id}/show
-#     defaults: { _controller: "sil16AdminBundle:Product:show" }
-#     methods:  GET
-
 admin_product_new:
     path:     /new
     defaults: { _controller: "sil16AdminBundle:Product:new" }
@@ -22,3 +17,7 @@ admin_product_delete:
     path:     /{id}/delete
     defaults: { _controller: "sil16AdminBundle:Product:delete" }
     methods:  DELETE
+
+admin_toggle_active:
+  path:   /{id}/toggle
+  defaults: { _controller: "sil16AdminBundle:Product:toggleActive"}

@@ -19,7 +19,7 @@ class Customer implements UserInterface, \Serializable
     }
 
     public function getRoles() {
-      if ($this->isAdmin()) // Si le client est administrateur
+      if ($this->is_admin) // Si le client est administrateur
         return array('ROLE_ADMIN'); // on lui accorde le rôle ADMIN
       else
         return array('ROLE_CUSTOMER'); // sinon le rôle USER
@@ -217,5 +217,33 @@ class Customer implements UserInterface, \Serializable
     public function getCommandes()
     {
         return $this->commandes;
+    }
+    /**
+     * @var boolean
+     */
+    private $is_admin;
+
+
+    /**
+     * Set is_admin
+     *
+     * @param boolean $isAdmin
+     * @return Customer
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->is_admin = $isAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get is_admin
+     *
+     * @return boolean
+     */
+    public function getIsAdmin()
+    {
+        return $this->is_admin;
     }
 }

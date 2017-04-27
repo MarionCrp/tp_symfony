@@ -12,14 +12,35 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
-  public function findBestSells($n=3) {
-    $first_query = $this->getEntityManager()
-                ->createQuery('select p, sum(ol.quantity) as qte from sil16VitrineBundle:Product p, sil16VitrineBundle:OrderLine ol where ol.product = p group by ol.product order by qte DESC')
-                ->setMaxResults($n)
+    public function findBestSells($n=3) {
+        $first_query = $this->getEntityManager()
+                    ->createQuery('select p, sum(ol.quantity) as qte from sil16VitrineBundle:Product p, sil16VitrineBundle:OrderLine ol where ol.product = p group by ol.product order by qte DESC')
+                    ->setMaxResults($n)
+                    ->getResult();
+                    foreach($first_query as $element){
+                      $products[] = $element[0];
+                    }
+        return $products;
+    }
+
+    public function findByActive($active = true){
+        $qb = $this->createQueryBuilder('p');
+        return $qb->where('p.active = :active')
+                  ->setParameter('active', $active)
+                  ->getQuery()
+                  ->getResult();
+    }
+
+    // Récupère tous les articles d'une catégorie, en choisissant la valeur actif ou non
+    public function findByActiveWithCategory($product_category_id, $active = true){
+      $qb = $this->createQueryBuilder('p');
+      return $qb->join('p.product_category', 'pc')
+                ->addSelect('pc')
+                ->where('pc.id = :product_category_id')
+                ->setParameter('product_category_id', $product_category_id)
+                ->andWhere('p.active = :active')
+                ->setParameter('active', $active)
+                ->getQuery()
                 ->getResult();
-                foreach($first_query as $element){
-                  $products[] = $element[0];
-                }
-                return $products;
-              }
+    }
 }

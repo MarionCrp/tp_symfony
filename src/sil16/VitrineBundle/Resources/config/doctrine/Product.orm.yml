@@ -19,6 +19,9 @@ sil16\VitrineBundle\Entity\Product:
       nullable: true
     stock:
       type: integer
+    active:
+      type: boolean
+      default: true
 
   manyToOne:
     product_category:
