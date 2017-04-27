@@ -36,7 +36,7 @@ class ProductController extends Controller
 
         // Filtre par catégorie et active/inactive/tous selon le paramètre envoyé.
         if($category_id_requested){
-            if($active_state_requested === "both"){
+            if($active_state_requested === "both" || $active_state_requested === null){
                 $category = $em->getRepository('sil16VitrineBundle:ProductCategory')->find($category_id_requested);
                 $products = $category->getProducts();
             } else {

@@ -43,7 +43,7 @@
             {% for product in products %}
 								<td>{{ product.id }}</td>
                 <td>{{ product.name }} </td>
-                <td>{{ product.productCategory.name }} </td>
+                <td><a href="{{ path("admin_product_category_edit", {"id": product.productCategory.id}) }}">{{ product.productCategory.name }}</a> </td>
                 <td>{{ product.price }} </td>
                 <td>{{ product.stock }}
 									{% if product.stock == 0 %}
@@ -63,6 +63,10 @@
               </tr>
             {% endfor %}
         </table>
+
+				{% if products|length == 0 %}
+					<p> Aucun produit </p>
+				{% endif %}
 
 			</div><!-- row -->
 		</div><!-- container -->
