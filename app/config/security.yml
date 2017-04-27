@@ -1,27 +1,18 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/security.html
 security:
+    access_denied_url: /render
     encoders:
-        sil16\VitrineBundle\Entity\Customer: bcrypt
-            # algorithm: bcrypt
-            # cost: 12
+        sil16\VitrineBundle\Entity\Customer:
+            algorithm: bcrypt
+            cost: 12
     role_hierarchy:
-        # ROLE_ADMIN: ROLE_CUSTOMER
+         ROLE_ADMIN: ROLE_CUSTOMER
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         customers:
             entity: { class: sil16VitrineBundle:Customer, property: email }
-
-        in_memory:
-            memory:
-              users:
-                  customer:
-                      password:   password
-                      roles:      'ROLE_CUSTOMER'
-                  admin@email.com:
-                      password:   password
-                      roles:      [ROLE_CUSTOMER, ROLE_ADMIN]
 
     firewalls:
         vitrine_area:
@@ -32,24 +23,13 @@ security:
                 check_path: login
             logout:
                 path: /logout
-                target: /accueil
+                target: /login
 
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
-
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/mon-compte, roles: ROLE_CUSTOMER }
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/mon-compte, roles: ROLE_CUSTOMER }

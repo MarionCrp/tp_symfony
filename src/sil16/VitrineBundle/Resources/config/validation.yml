@@ -33,8 +33,8 @@ sil16\VitrineBundle\Entity\Product:
           maxMessage: Le nom du produit est trop long (40 caractères maximum)
     description:
       - Length:
-          max: 150
-          maxMessage: La description du produit est trop longue (150 caractères maximum)
+          max: 300
+          maxMessage: La description du produit est trop longue (300 caractères maximum)
     price:
       - Type:
           type: float

@@ -14,24 +14,7 @@
       <li><a href="{{ path('sil16_vitrine_accueil') }}"> Accueil </a></li>
       <li><a href="{{ path('sil16_vitrine_mentions') }}"> Mentions légales </a></li>
       <li><a href="{{ path('sil16_vitrine_catalogue') }}"> Catalogue </a></li>
-      <li>
-        <a href="{{ path('sil16_vitrine_basket_index') }}">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-           Mon Panier
-        </a>
-      </li>
-      {% if app.user == null %}
-        <li>
-          <a href="{{ path('sil16_vitrine_subscription') }}">
-             S'inscrire
-          </a>
-        </li>
-        <li>
-          <a href="{{ path("login") }}">
-             Se connecter
-          </a>
-        </li>
-      {% else %}
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <li>
           <a href="{{ path('sil16_vitrine_commande_index') }}">
              Mes commandes
@@ -40,6 +23,30 @@
         <li>
           <a href="{{ path('logout') }}">
              Se déconnecter
+          </a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{{ path('sil16_vitrine_subscription') }}">
+            S'inscrire
+          </a>
+        </li>
+        <li>
+          <a href="{{ path("login") }}">
+            Se connecter
+          </a>
+        </li>
+      {% endif %}
+      <li>
+        <a href="{{ path('sil16_vitrine_basket_index') }}">
+          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+          Mon Panier
+        </a>
+      </li>
+      {% if is_granted('ROLE_ADMIN') %}
+        <li>
+          <a href="{{ path('admin_dashboard') }}">
+             Administration
           </a>
         </li>
       {% endif %}

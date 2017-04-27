@@ -1,3 +1,7 @@
+render_with_access_denied_errors:
+  path: /render
+  defaults: { _controller: sil16VitrineBundle:Default:renderWithAccessDeniedErrors }
+
 # STATIC PAGES
 sil16_vitrine_accueil:
     path:     /
@@ -57,11 +61,11 @@ sil16_vitrine_basket_clear:
 
 # COMMANDES
 sil16_vitrine_commande_create:
-    path:     /mon-panier/create
+    path:     /mon-compte/mes-commandes/create
     defaults: { _controller: sil16VitrineBundle:Commande:create }
 sil16_vitrine_commande_index:
-    path:     /mon-panier/index
+    path:     /mon-compte/mes-commandes
     defaults: { _controller: sil16VitrineBundle:Commande:index }
 sil16_vitrine_commande_show:
-    path:     /mon-panier/commandes/{commande_id}}
+    path:     /mon-compte/mes-commandes/{commande_id}}
     defaults: { _controller: sil16VitrineBundle:Commande:show }

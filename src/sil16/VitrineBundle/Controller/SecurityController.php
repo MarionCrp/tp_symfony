@@ -10,6 +10,11 @@ use Symfony\Component\Security\Core\SecurityContext;
 class SecurityController extends Controller
 {
   public function logInAction(Request $request) {
+
+      if($this->getUser()){
+        $this->addFlash('success', "Vous êtes déjà connecté");
+        return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
+      }
       $authenticationUtils = $this->get('security.authentication_utils');
 
       // get the login error if there is one

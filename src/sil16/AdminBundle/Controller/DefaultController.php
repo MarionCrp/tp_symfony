@@ -8,19 +8,12 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-      $admin = $this->findCurrentAdmin();
-      if($admin){
-        return $this->render('sil16AdminBundle:Default:index.html.twig', array());
-      } else {
-        return $this->redirectToRoute('admin_login');
-      }
-    }
-
-    private function findCurrentAdmin(){
-      $session = $this->getRequest()->getSession();
-      $admin_id = (int) $session->get('admin_id');
-      $admin_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Admin');
-      $admin = $admin_manager->find($admin_id);
-      return $admin;
+      die();
+      // if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+      //   $this->addFlash('success', "Veuillez vous connecter avec votre compte administrateur pour accéder au back-office");
+      //   return $this->redirectToRoute('login');
+      // } else {
+      //   return $this->render('sil16AdminBundle:Default:index.html.twig', array());
+      // }
     }
 }

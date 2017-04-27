@@ -33,6 +33,7 @@ class RegistrationController extends Controller
               $password = $this->get('security.password_encoder')
                   ->encodePassword($new_customer, $new_customer->getPassword());
               $new_customer->setPassword($password);
+              $new_customer->setIsAdmin(false);
 
               // 4) save the Customer!
               $em = $this->getDoctrine()->getManager();

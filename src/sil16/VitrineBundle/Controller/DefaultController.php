@@ -29,4 +29,10 @@ class DefaultController extends Controller
       $customer = $customer_manager->find($customer_id);
         return $customer;
     }
+
+
+    public function renderWithAccessDeniedErrorsAction(){
+        $this->addFlash('success', "Vous n'êtes pas autorisé à accéder à cette page");
+        return $this->redirectToRoute('sil16_vitrine_accueil');
+    }
 }

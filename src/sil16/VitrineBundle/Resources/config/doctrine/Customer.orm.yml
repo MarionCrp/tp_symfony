@@ -19,6 +19,9 @@ sil16\VitrineBundle\Entity\Customer:
     password:
       type: string
       length: 60
+    is_admin:
+      type: boolean
+      default: false
 
 
   oneToMany:
