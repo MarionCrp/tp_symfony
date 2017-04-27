@@ -10,6 +10,14 @@ class ProductCategoryController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $product_categories = $em->getRepository('sil16VitrineBundle:ProductCategory')->findAll();
-      return $this->render('sil16VitrineBundle:ProductCategory:index.html.twig', array('product_categories' => $product_categories));
+
+      // On stock dans un tableau les catégories, et le nombre de produits associés
+      foreach($product_categories as $category){
+        $results[] = array(
+          'product_category' => $category,
+          'active_products_count' => count($em->getRepository('sil16VitrineBundle:Product')->findByActiveWithCategory($category->getId()))
+        );
+        }
+      return $this->render('sil16VitrineBundle:ProductCategory:index.html.twig', array('results' => $results));
     }
 }

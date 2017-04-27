@@ -16,7 +16,7 @@ class ProductController extends Controller
           $this->addFlash('danger', "La catégorie demandée n'existe pas !");
           return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
         } else {
-          $products = $category->getProducts();
+          $products = $em->getRepository('sil16VitrineBundle:Product')->findByActiveWithCategory($product_category_id);
           //Initialisation Formulaire
           $data = array();
           $form_views = [];

@@ -10,13 +10,13 @@
 		<div class="container">
       <div class="row centered">
         <br>
-      {% for categorie in product_categories %}
+      {% for result in results %}
 
   				<div class="col-lg-3">
   					<div class="tilt">
-              <a href="{{ path('sil16_vitrine_articles_par_categorie', { product_category_id: categorie.getId() } )  }}">
-                <h2> {{ categorie.name() }} </h2>
-                <div class="price">{{ categorie.getProducts().count() }} article{% if(categorie.getProducts().count() > 1) %}s {% endif %} </div>
+              <a href="{{ path('sil16_vitrine_articles_par_categorie', { product_category_id: result['product_category'].getId() } )  }}">
+                <h2> {{ result['product_category'].name() }} </h2>
+                <div class="price">{{ result['active_products_count'] }} article{% if(result['active_products_count'] > 1) %}s {% endif %} </div>
               </a>
             </div>
   				</div>

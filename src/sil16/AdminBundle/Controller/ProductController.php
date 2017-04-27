@@ -74,7 +74,7 @@ class ProductController extends Controller
             $em->persist($product);
             $em->flush($product);
 
-            return $this->redirectToRoute('admin_product_edit', array('id' => $product->getId()));
+            return $this->redirectToRoute('admin_product_index');
         }
 
         return $this->render('sil16AdminBundle:Product:new.html.twig', array(

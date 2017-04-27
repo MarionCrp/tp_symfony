@@ -5,6 +5,7 @@ namespace sil16\VitrineBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use sil16\VitrineBundle\Entity\Basket;
+use sil16\VitrineBundle\Entity\Product;
 use sil16\VitrineBundle\Entity\Commande;
 use sil16\VitrineBundle\Entity\OrderLine;
 
@@ -41,42 +42,58 @@ class CommandeController extends Controller
             $new_commande = new Commande();
             $new_commande->setCustomer($current_customer);
             $new_commande->setState('pending');
+            $order_lines_count = 0;
+            // Affiche un flash si une erreur s'est produite lors de la commande
+            $error_with_a_product = false;
             foreach($basket->getContent() as $product_id => $quantity){
                 $product = $this->findProduct($product_id);
                 // On vérifie que le produit existe et que le stock suffise
-                if($product && $product->getStock() >= $quantity){
+                if($product && $product->getActive() === true && $product->getStock() >= $quantity){
                     $order_line = new OrderLine;
                     $order_line->setUnitPrice($product->getPrice());
                     $order_line->setQuantity($quantity);
                     $order_line->setProduct($product);
                     $order_line->setCommande($new_commande);
                     $em->persist($order_line);
+                    // Compteur qui nous permet de savoir si la commande n'est pas vide
+                    $order_lines_count += 1;
 
                     $stock = $product->getStock();
                     // On met à jour les stocks lorsque la commande est effetuée
                     $product->setStock($stock - $quantity);
                     $em->persist($product);
+
+
+                } else {
+                  $error_with_a_product = true;
                 }
                 // On supprime chaque produit du panier
                 $basket->deleteProduct($product_id);
             }
-             // Ajout dans la BDD
-            $em->persist($new_commande);
+             // Ajout dans la BDD seulement si au moins une ligne de produit à pu être ajoutée
 
-            // Le panier est sensé être vide si tout s'est bien passé
-            $session->set('basket', $basket);
-            $em->flush();
+            if(count($order_lines_count > 0)){
+                  $em->persist($new_commande);
+                  // Le panier est sensé être vide si tout s'est bien passé
+                  $session->set('basket', $basket);
+                  $em->flush();
+                  $last_commande = $this->getUser()->getCommandes()->last();
 
-            // On va rediriger le client vers la fiche détaillée de la commande qu'il vient de passer
-            $last_commande = $this->getUser()->getCommandes()->last();
-            $this->addFlash('success', "Félicitations pour votre commande!");
-            return $this->redirectToRoute('sil16_vitrine_commande_show', array('commande_id' => $last_commande->getId()));
-        } else {
-            $this->addFlash('danger', "La commande a échouée : Votre panier est vide.");
-            return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
+                  if($error_with_a_product){
+                        $this->addFlash('danger', "Attention, des produits n'ont pas pu être ajoutés à votre commande!");
+                  } else {
+                        $this->addFlash('success', "Félicitations pour votre commande!");
+                  }
+                  // On va rediriger le client vers la fiche détaillée de la commande qu'il vient de passer
+                  return $this->redirectToRoute('sil16_vitrine_commande_show', array('commande_id' => $last_commande->getId()));
+              } else {
+                  $this->addFlash('danger', "La commande a échouée.");
+                  return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
+              }
+          }
+          $this->addFlash('danger', "La commande a échouée: votre panier est vide");
+          return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
         }
-
-    }
 
     // Détail d'une commande
     public function showAction($commande_id){
