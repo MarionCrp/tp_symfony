@@ -26,6 +26,7 @@ class ProductController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        // FILTRES par catégories ou produits actifs.
         $category_id_requested = $request->query->get('by_product_category_id');
         $active_state_requested = $request->query->get('by_active');
 
@@ -56,6 +57,7 @@ class ProductController extends Controller
             }
         }
 
+        // Si pas de paramètre on affiche tout
         $product_categories = $em->getRepository('sil16VitrineBundle:ProductCategory')->findAll();
 
         return $this->render('sil16AdminBundle:Product:index.html.twig', array(
@@ -118,12 +120,8 @@ class ProductController extends Controller
         ));
     }
 
-    /**
-     *
-     * @param Product $product The productCategory entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
+
+    // Change la valeur actif ou inactif d'un produit
     public function toggleActiveAction(Product $product)
     {
         // Vérification de l'authentification

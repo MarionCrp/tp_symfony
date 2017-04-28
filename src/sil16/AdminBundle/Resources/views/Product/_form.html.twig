@@ -1,23 +1,31 @@
+{# PARTALE : FORMULAIRE COMMUNS A new & edit action #}
 <div class="row">
   <div class="col-sm-4"></div>
   <div class="col-sm-4">
     <a class="btn btn-default" href="{{ path('admin_product_index') }}"> Retour Produits</a>
   </div>
 </div>
+
+{# FORMULAIRE #}
 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
   <div class="form-group">
+    {# LIBELLE #}
     {{ form_label(form.name, "Libellé", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
     <div class="col-sm-4">
       {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
     </div>
     <div class="col-sm-4 form_errors">{{ form_errors(form.name) }}</div>
   </div>
+
+  {# CATEGORIES #}
   <div class="form-group">
     {{ form_label(form.product_category, "Catégorie", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
     <div class="col-sm-4">
       {{ form_widget(form.product_category, {'attr': {'class': 'form-control'}}) }}
     </div>
   </div>
+
+  {# DESCRIPTION #}
   <div class="form-group">
     {{ form_label(form.description, "Description", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
     <div class="col-sm-4">
@@ -25,6 +33,8 @@
     </div>
     <div class="col-sm-4 form_errors">{{ form_errors(form.description) }}</div>
   </div>
+
+  {# PRIX #}
   <div class="form-group">
     {{ form_label(form.price, "Prix", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
     <div class="col-sm-4">
@@ -32,6 +42,8 @@
     </div>
     <div class="col-sm-4 form_errors">{{ form_errors(form.price) }}</div>
   </div>
+
+  {# STOCK #}
   <div class="form-group">
     {{ form_label(form.stock, "Stock", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
     <div class="col-sm-4">
@@ -39,6 +51,8 @@
     </div>
     <div class="col-sm-4 form_errors">{{ form_errors(form.stock) }}</div>
   </div>
+
+  {# VISIIBILITE (actif/inactif) #}
   <div class="form-group">
     {{ form_label(form.active, "Visbilité", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
     <div class="col-sm-4">
@@ -46,6 +60,8 @@
     </div>
     <div class="col-sm-4 form_errors">{{ form_errors(form.active) }}</div>
   </div>
+
+  {# SUBMIT #}
   <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">

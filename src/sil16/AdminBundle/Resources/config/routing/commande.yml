@@ -3,11 +3,6 @@ admin_commande_index:
     defaults: { _controller: "sil16AdminBundle:Commande:index" }
     methods:  GET
 
-# admin_commande_show:
-#     path:     /{id}/show
-#     defaults: { _controller: "sil16AdminBundle:Commande:show" }
-#     methods:  GET
-
 admin_commande_new:
     path:     /new
     defaults: { _controller: "sil16AdminBundle:Commande:new" }
