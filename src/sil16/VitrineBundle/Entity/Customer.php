@@ -14,6 +14,12 @@ class Customer implements UserInterface, \Serializable
         return $this->email; // l'email est utilisé comme login
     }
 
+    // Utilisé dans le formulaire d'édition de commande dans l'admin.
+    public function getFullName()
+    {
+        return (strtoupper($this->getLastname()). ' ' .$this->getFirstname());
+    }
+
     public function getSalt() {
         return null; // inutile avec l’encryptage choisi
     }

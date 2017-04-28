@@ -45,7 +45,10 @@ class ProductController extends Controller
       // Renvoie les produits actifs les plus vendus
       public function bestSellAction(){
         $em = $this->getDoctrine()->getManager();
-        $products = $em->getRepository('sil16VitrineBundle:Product')->findBestSells();
-        return $this->render('sil16VitrineBundle:ProductCategory:Product/best_sell.html.twig', array('products' => $products));
+        $commandes = $em->getRepository('sil16VitrineBundle:Commande')->findAll();
+        if($commandes){
+          $products = $em->getRepository('sil16VitrineBundle:Product')->findBestSells();
+          return $this->render('sil16VitrineBundle:ProductCategory:Product/best_sell.html.twig', array('products' => $products));
+        }
       }
 }
