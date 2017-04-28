@@ -25,23 +25,4 @@
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- DG -->
-  <script>
-      window.addEventListener("load", function() {
-        var pictures = document.getElementsByClassName('product_picture');
-        for (i = 0; i < pictures.length; i++) {
-          pictures[i].addEventListener("mouseover", function( event ) {
-            var src = this.src;
-            var new_src = src.slice(0,src.length - 6) + src.slice(src.length - 4, src.length)
-            this.src = new_src;
-          });
-
-          pictures[i].addEventListener("mouseout", function( event ) {
-            var src = this.src;
-            var new_src = src.slice(0,src.length - 4) + "_2" + src.slice(src.length - 4, src.length)
-            this.src = new_src;
-          });
-        }
-      }
-    );
-  </script>
 {% endblock %}

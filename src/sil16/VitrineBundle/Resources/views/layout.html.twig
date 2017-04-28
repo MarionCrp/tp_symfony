@@ -62,5 +62,22 @@
     <script src="{{ asset('bundles/sil16vitrine/js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('bundles/sil16vitrine/js/bootstrap.js') }}"></script>
     <script src="{{ asset('bundles/sil16vitrine/js/flash.js') }}"></script>
+    <script>
+        window.addEventListener("load", function() {
+          var pictures = document.getElementsByClassName('product_picture');
+          for (i = 0; i < pictures.length; i++) {
+            pictures[i].addEventListener("mouseover", function( event ) {
+              var the_src = this.src
+              this.src = the_src.replace("off", "on");
+            });
+
+            pictures[i].addEventListener("mouseout", function( event ) {
+              var the_src = this.src
+              this.src = the_src.replace("on", "off");
+            });
+
+          }
+        });
+    </script>
   </body>
 </html>

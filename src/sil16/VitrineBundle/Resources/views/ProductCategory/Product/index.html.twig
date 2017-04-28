@@ -14,7 +14,7 @@
   				<div class="col-lg-3">
   					<div class="tilt">
               {% if product.getPictures()|length > 0  %}
-  					     <a href="#"><img class="product_picture" src="{{ asset('bundles/sil16vitrine/pictures/products/'~ product.getPictures().first().getName()) }}.jpg" alt="product.getPictures().first().getName()" width=300></a>
+  					     <a href="#"><img class="product_picture" src="{{ asset('bundles/sil16vitrine/pictures/products/'~ product.getPictures().first().getName()) }}.jpg" alt="{{ product.getPictures().first().getName() }}" width=300></a>
               {% else %}
                  <a href="#"><img src="{{ asset('bundles/sil16vitrine/pictures/products/no_available.jpg') }}" alt="Pas de photo disponible" width=300 height=300></a>
               {% endif %}
@@ -50,21 +50,4 @@
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- DG -->
-  <script>
-      window.addEventListener("load", function() {
-        var pictures = document.getElementsByClassName('product_picture');
-        for (i = 0; i < pictures.length; i++) {
-          pictures[i].addEventListener("mouseover", function( event ) {
-            var the_src = this.src
-            this.src = the_src.replace("off", "on");
-          });
-
-          pictures[i].addEventListener("mouseout", function( event ) {
-            var the_src = this.src
-            this.src = the_src.replace("on", "off");
-          });
-
-        }
-      });
-  </script>
 {% endblock %}
