@@ -104,6 +104,7 @@ class ProductCategoryController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // On vérifie que la catégorie n'a pas d'objet associé. Sinon elle ne peut pas être supprimée, et on affiche un flash
             if(count($product_category->getProducts()) > 0){
               $this->addFlash('danger', "La catégorie n'a pas pu être supprimée car des produits lui sont associés");
             } else {

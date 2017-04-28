@@ -34,7 +34,7 @@
                 <td>{{ commande.id }} </td>
                 <td>{{ commande.customer.firstName ~ ' ' ~ commande.customer.lastName }} </td>
                 <td>{{ commande.customer.email }} </td>
-                <td> TODO </td>
+                <td>{{ commande.getTotalPrice() }} </td>
                 <td>{{ commande.getTranslatedState() }}</td>
                 <td>
                   <a type="button" class="btn btn-primary" aria-label="Edit" href="{{ path("admin_commande_edit", {"id": commande.id}) }}">

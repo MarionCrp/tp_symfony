@@ -19,6 +19,11 @@ class ProductController extends Controller
      */
     public function indexAction(Request $request)
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $category_id_requested = $request->query->get('by_product_category_id');
@@ -65,6 +70,10 @@ class ProductController extends Controller
      */
     public function newAction(Request $request)
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
         $product = new Product();
         $form = $this->createForm('sil16\AdminBundle\Form\ProductType', $product);
         $form->handleRequest($request);
@@ -89,6 +98,10 @@ class ProductController extends Controller
      */
     public function editAction(Request $request, Product $product)
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
 
         $editForm = $this->createForm('sil16\AdminBundle\Form\ProductType', $product);
         $editForm->handleRequest($request);
@@ -113,6 +126,11 @@ class ProductController extends Controller
      */
     public function toggleActiveAction(Product $product)
     {
+        // Vérification de l'authentification
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('render_with_access_denied_errors');
+        }
+
         $active_value = $product->getActive();
         $product->setActive(!$active_value);
         $em = $this->getDoctrine()->getManager();

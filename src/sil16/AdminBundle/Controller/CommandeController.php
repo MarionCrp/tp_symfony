@@ -51,7 +51,7 @@ class CommandeController extends Controller
             $em->persist($commande);
             $em->flush($commande);
 
-            return $this->redirectToRoute('admin_commande_edit', array('id' => $commande->getId()));
+            return $this->redirectToRoute('admin_commande_index');
         }
 
         return $this->render('sil16AdminBundle:Commande:new.html.twig', array(
@@ -77,7 +77,7 @@ class CommandeController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', "la commande a été éditée avec succès");
-            return $this->redirectToRoute('admin_commande_edit', array('id' => $commande->getId()));
+            return $this->redirectToRoute('admin_commande_index');
         }
 
         return $this->render('sil16AdminBundle:Commande:edit.html.twig', array(

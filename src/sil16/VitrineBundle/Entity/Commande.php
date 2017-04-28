@@ -34,6 +34,15 @@ class Commande
         $this->order_lines = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function getTotalPrice(){
+      $order_lines = $this->getOrderLines();
+      $total_price = 0;
+      foreach($order_lines as $line){
+        $total_price += $line->getTotalPrice();
+      }
+      return $total_price;
+    }
+
     /**
      * Get id
      *

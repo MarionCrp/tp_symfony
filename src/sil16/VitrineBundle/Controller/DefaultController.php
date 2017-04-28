@@ -22,15 +22,6 @@ class DefaultController extends Controller
         return $this->render('sil16VitrineBundle:Default:mentions.html.twig');
     }
 
-    private function findCurrentCustomer(){
-      $session = $this->getRequest()->getSession();
-      $customer_id = (int) $session->get('customer_id');
-      $customer_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Customer');
-      $customer = $customer_manager->find($customer_id);
-        return $customer;
-    }
-
-
     public function renderWithAccessDeniedErrorsAction($message, $route){
         $this->addFlash('danger', $message);
         return $this->redirectToRoute($route);

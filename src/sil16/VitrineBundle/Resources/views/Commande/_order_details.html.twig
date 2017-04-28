@@ -1,5 +1,6 @@
 <h2>Commande du {{ commande.getCreatedAt().format('d/m/Y \à H \\h i') }}</h2>
 <h3>{{ commande.getTranslatedState() }}</h3>
+<h3>Montant total : {{ commande.getTotalPrice() }} € </h3>
 <table class="table table-hover">
    <thead>
       <tr>
@@ -15,7 +16,7 @@
      <td>{{ order_line.product.name }}</td>
      <td><a href="{{ path('sil16_vitrine_articles_par_categorie', { product_category_id: order_line.product.getProductCategory.getId() } ) }}">{{ order_line.product.getProductCategory.name }}</a></td>
      <td>{{ order_line.quantity  }}</td>
-     <td>{{ order_line.getUnitPrice * order_line.quantity }}</td>
+     <td>{{ order_line.getTotalPrice }}</td>
    </tr>
  {% endfor %}
  </tbody>

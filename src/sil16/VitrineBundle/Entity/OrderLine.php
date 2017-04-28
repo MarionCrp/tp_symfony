@@ -38,7 +38,7 @@ class OrderLine
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -61,7 +61,7 @@ class OrderLine
     /**
      * Get quantity
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuantity()
     {
@@ -84,7 +84,7 @@ class OrderLine
     /**
      * Get unit_price
      *
-     * @return string 
+     * @return string
      */
     public function getUnitPrice()
     {
@@ -107,7 +107,7 @@ class OrderLine
     /**
      * Get product
      *
-     * @return \sil16\VitrineBundle\Entity\Product 
+     * @return \sil16\VitrineBundle\Entity\Product
      */
     public function getProduct()
     {
@@ -130,10 +130,14 @@ class OrderLine
     /**
      * Get commande
      *
-     * @return \sil16\VitrineBundle\Entity\Commande 
+     * @return \sil16\VitrineBundle\Entity\Commande
      */
     public function getCommande()
     {
         return $this->commande;
+    }
+
+    public function getTotalPrice(){
+      return $this->getQuantity() * $this->getUnitPrice();
     }
 }
