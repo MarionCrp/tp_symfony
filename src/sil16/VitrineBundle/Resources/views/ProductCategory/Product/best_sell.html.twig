@@ -1,7 +1,7 @@
 <div class="row centered">
   <br>
   <h2> PRODUITS LES PLUS VENDUS </h2>
-{% for product in products %}
+  {% for product in products %}
     <div class="col-lg-3">
       <div class="tilt">
         {% if product.getPictures()|length > 0  %}

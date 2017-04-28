@@ -11,7 +11,7 @@ sil16_admin_commande:
     resource: "@sil16AdminBundle/Resources/config/routing/commande.yml"
     prefix:   /commandes
 
-# DASHBOARD
+# DASHBOARD - ACCUEIL (simple)
 admin_dashboard:
     path:     /
     defaults: { _controller: sil16AdminBundle:Default:index }

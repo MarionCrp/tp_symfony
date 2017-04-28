@@ -31,5 +31,6 @@ security:
             security: false
 
     access_control:
+        # J'ai préféré gérer les redirections cas par cas plutôt qu'automatiser cette dernière.
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/mon-compte, roles: ROLE_CUSTOMER }

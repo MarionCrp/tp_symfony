@@ -9,6 +9,8 @@ sil16_vitrine_mentions:
 
 ### CUSTOMER SESSION ###########################################################
 # Méthode de redirection si l'authentification n'est pas valide
+# paramètres : - message spécifié, sinon message par défaut.
+#              - route spécifiée de redirection, sinon l'accueil par défaut.
 render_with_access_denied_errors:
   path: /render/{message}/{route}
   defaults: { _controller: sil16VitrineBundle:Security:renderWithAccessDeniedErrors, message: "Vous n'êtes pas autorisé à accéder à cette page", route: 'sil16_vitrine_accueil' }
