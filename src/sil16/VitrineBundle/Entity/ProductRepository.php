@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    // Les articles actifs les plus vendus
     public function findBestSells($n = 3, $active = true) {
         $first_query = $this->getEntityManager()
                     ->createQuery('select p, sum(ol.quantity) as qte from sil16VitrineBundle:Product p, sil16VitrineBundle:OrderLine ol where ol.product = p and p.active = :value group by ol.product order by qte DESC')
@@ -24,6 +25,7 @@ class ProductRepository extends EntityRepository
         return $products;
     }
 
+    // Retourne les artcles actifs
     public function findByActive($active = true){
         $qb = $this->createQueryBuilder('p');
         return $qb->where('p.active = :active')
@@ -32,7 +34,7 @@ class ProductRepository extends EntityRepository
                   ->getResult();
     }
 
-    // Récupère tous les articles d'une catégorie, en choisissant la valeur actif ou non
+    // Récupère tous les articles d'une catégorie, en choisissant la valeur actif ou no
     public function findByActiveWithCategory($product_category_id, $active = true){
       $qb = $this->createQueryBuilder('p');
       return $qb->join('p.product_category', 'pc')

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Commande
 {
+  // nom d'état accepté pour une commande (voir validation dans la méthode setState() plus bas)
   const STATES = ['pending', 'paid', 'send'];
 
     /**
@@ -34,6 +35,7 @@ class Commande
         $this->order_lines = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    // Retourne le montant total d'une commande
     public function getTotalPrice(){
       $order_lines = $this->getOrderLines();
       $total_price = 0;
@@ -169,6 +171,7 @@ class Commande
         return $this->state;
     }
 
+    // Traduction à afficher dans le selecteur côté admin (Admin::Products edit)
     public function getTranslatedState(){
       switch($this->state) {
         case 'pending':

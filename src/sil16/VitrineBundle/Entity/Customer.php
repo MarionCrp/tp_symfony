@@ -131,16 +131,6 @@ class Customer implements UserInterface, \Serializable
     }
 
     /**
-     * Get FullName
-     *
-     * @return string
-     */
-    public function getFullName()
-    {
-        return (strtoupper($this->getLastname()). ' ' .$this->getFirstname());
-    }
-
-    /**
      * Set email
      *
      * @param string $email

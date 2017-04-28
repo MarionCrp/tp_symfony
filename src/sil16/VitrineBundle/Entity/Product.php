@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
 
+  // Variable qui indique à l'admin quand les stocks doivent être recommandé
   const LIMITED_STOCK = 10;
     /**
      * @var integer
@@ -31,6 +32,10 @@ class Product
      */
     private $description;
 
+    // Helper pour l'affichage des prix dans la vue
+    public function price_to_s(){
+      return number_format($this->price, 2, '€', '');
+    }
 
     /**
      * Get id
@@ -213,9 +218,6 @@ class Product
         return $this->pictures;
     }
 
-    public function price_to_s(){
-      return number_format($this->price, 2, '€', '');
-    }
     /**
      * @var integer
      */
