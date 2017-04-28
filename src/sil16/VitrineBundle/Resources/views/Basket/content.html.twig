@@ -18,6 +18,7 @@
           <td>{{ item['qty']  }}</td>
           <td>{{ item['product'].price * item['qty'] }}</td>
           <td>
+            {# SUPPRESSION D'UNE LIGNE DANS LE PANIER #}
             <a href="{{ path('sil16_vitrine_basket_delete_product', { product_id: item['product'].getId() }) }}" onclick="return confirm('Voulez-vous supprimer ce produit')">
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </a>
@@ -29,6 +30,8 @@
       </tr>
       </tbody>
     </table>
+
+    {# CONFIRMATION DE LA COMMANDE. BOUTON DISABLED SI LE CLIENT N'EST PAS CONNECTE #}
     <a href="{{ path('sil16_vitrine_commande_create') }}"
         class="btn btn-primary"
         onclick="return confirm('Confirmer la commande ?')"
@@ -36,6 +39,8 @@
         >
       Confirmer la commande
     </a>
+
+    {# VIDER PANIER #}
     <a href="{{ path('sil16_vitrine_basket_clear') }}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment vider votre panier ?')">Vider le panier</a>
   {% else %}
      <h2>Votre panier est vide : Faites des courses !</h2>

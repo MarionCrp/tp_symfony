@@ -1,7 +1,3 @@
-render_with_access_denied_errors:
-  path: /render/{message}/{route}
-  defaults: { _controller: sil16VitrineBundle:Security:renderWithAccessDeniedErrors, message: "Vous n'êtes pas autorisé à accéder à cette page", route: 'sil16_vitrine_accueil' }
-
 # STATIC PAGES
 sil16_vitrine_accueil:
     path:     /
@@ -12,6 +8,11 @@ sil16_vitrine_mentions:
     defaults: { _controller: sil16VitrineBundle:Default:mentions }
 
 ### CUSTOMER SESSION ###########################################################
+# Méthode de redirection si l'authentification n'est pas valide
+render_with_access_denied_errors:
+  path: /render/{message}/{route}
+  defaults: { _controller: sil16VitrineBundle:Security:renderWithAccessDeniedErrors, message: "Vous n'êtes pas autorisé à accéder à cette page", route: 'sil16_vitrine_accueil' }
+
 # INSCRIPTION
 sil16_vitrine_subscription:
     path:     /inscription
