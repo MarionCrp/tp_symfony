@@ -11,7 +11,7 @@ class ProductCategoryController extends Controller
       $em = $this->getDoctrine()->getManager();
       $product_categories = $em->getRepository('sil16VitrineBundle:ProductCategory')->findAll();
 
-      // On stock dans un tableau les catégories, et le nombre de produits associés
+      // On stock dans un tableau les catégories, et le nombre de produits actifs associés
       foreach($product_categories as $category){
         $results[] = array(
           'product_category' => $category,

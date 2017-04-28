@@ -16,8 +16,9 @@ class ProductController extends Controller
           $this->addFlash('danger', "La catégorie demandée n'existe pas !");
           return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
         } else {
+          // On ne récupère que les produits actifs
           $products = $em->getRepository('sil16VitrineBundle:Product')->findByActiveWithCategory($product_category_id);
-          //Initialisation Formulaire
+          //Initialisation des formulaires d'ajout au panier
           $data = array();
           $form_views = [];
 
@@ -41,12 +42,10 @@ class ProductController extends Controller
         }
       }
 
+      // Renvoie les produits actifs les plus vendus
       public function bestSellAction(){
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('sil16VitrineBundle:Product')->findBestSells();
-        return $this->render('sil16VitrineBundle:ProductCategory:Product/best_sell.html.twig',
-                             array('products' => $products
-                                 )
-                               );
+        return $this->render('sil16VitrineBundle:ProductCategory:Product/best_sell.html.twig', array('products' => $products));
       }
 }

@@ -12,11 +12,11 @@ use sil16\VitrineBundle\Entity\OrderLine;
 class CommandeController extends Controller
 {
     public function indexAction(){
+      // Vérification qu'un client est authentifié.
       if (!$this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER')) {
         $message = 'Vous devez être connecté pour accéder à cette page';
         return $this->redirectToRoute('render_with_access_denied_errors', array('message' => $message, 'route' => 'login'));
       }
-
       $current_customer = $this->getUser();
       $commandes = [];
       if($current_customer){
@@ -27,58 +27,65 @@ class CommandeController extends Controller
     }
 
     public function createAction() {
+      // Vérification qu'un client est authentifié.
       if (!$this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER')) {
         $message = 'Vous devez être connecté pour accéder à cette page';
         return $this->redirectToRoute('render_with_access_denied_errors', array('message' => $message, 'route' => 'login'));
       }
 
+      // SESSION & PANIER
       $session = $this->getRequest()->getSession();
       $basket = $session->get('basket', new Basket());
 
-      // Ajout d'unproduct dans une ligne de commande qu'on affecte à une Order
       $em = $this->getDoctrine()->getManager();
       $current_customer = $this->getUser();
-        if(!empty($basket->getContent())){
-            $new_commande = new Commande();
-            $new_commande->setCustomer($current_customer);
-            $new_commande->setState('pending');
-            $order_lines_count = 0;
-            // Affiche un flash si une erreur s'est produite lors de la commande
-            $error_with_a_product = false;
-            foreach($basket->getContent() as $product_id => $quantity){
-                $product = $this->findProduct($product_id);
-                // On vérifie que le produit existe et que le stock suffise
-                if($product && $product->getActive() === true && $product->getStock() >= $quantity){
-                    $order_line = new OrderLine;
-                    $order_line->setUnitPrice($product->getPrice());
-                    $order_line->setQuantity($quantity);
-                    $order_line->setProduct($product);
-                    $order_line->setCommande($new_commande);
-                    $em->persist($order_line);
-                    // Compteur qui nous permet de savoir si la commande n'est pas vide
-                    $order_lines_count += 1;
+      if(empty($basket->getContent())){
+        $this->addFlash('danger', "La commande a échouée: votre panier est vide");
+        return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
+      } else {
+          $new_commande = new Commande();
+          $new_commande->setCustomer($current_customer);
+          $new_commande->setState('pending');
 
-                    $stock = $product->getStock();
-                    // On met à jour les stocks lorsque la commande est effetuée
-                    $product->setStock($stock - $quantity);
-                    $em->persist($product);
+          // Vérificateurs et notifieurs d'erreurs
+          $order_lines_count = 0;
+          $error_with_a_product = false;
 
+          // Création d'une ligne de commande pour chaque article (avec sa quantité)
+          foreach($basket->getContent() as $product_id => $quantity){
+              $product = $this->findProduct($product_id);
+              // On vérifie que le produit existe et que le stock suffise
+              if($product && $product->getActive() === true && $product->getStock() >= $quantity){
+                  $order_line = new OrderLine;
+                  $order_line->setUnitPrice($product->getPrice());
+                  $order_line->setQuantity($quantity);
+                  $order_line->setProduct($product);
+                  $order_line->setCommande($new_commande);
+                  $em->persist($order_line);
+                  // Compteur qui nous permet de savoir si la commande n'est pas vide
+                  $order_lines_count += 1;
 
-                } else {
-                  $error_with_a_product = true;
-                }
-                // On supprime chaque produit du panier
-                $basket->deleteProduct($product_id);
+                  $stock = $product->getStock();
+                  // On met à jour les stocks lorsque la commande est effetuée
+                  $product->setStock($stock - $quantity);
+                  $em->persist($product);
+
+              } else { // Le produit n'a pas été trouvé en base
+                $error_with_a_product = true;
+              }
+              // On supprime chaque produit du panier
+              $basket->deleteProduct($product_id);
             }
-             // Ajout dans la BDD seulement si au moins une ligne de produit à pu être ajoutée
 
+             // Ajout dans la BDD seulement si au moins une ligne de produit à pu être ajoutée
             if(count($order_lines_count > 0)){
                   $em->persist($new_commande);
                   // Le panier est sensé être vide si tout s'est bien passé
                   $session->set('basket', $basket);
                   $em->flush();
-                  $last_commande = $this->getUser()->getCommandes()->last();
 
+                  // La commande qui vient d'être effectuée et dont on va affiché le détail à la fin de cette action
+                  $last_commande = $this->getUser()->getCommandes()->last();
                   if($error_with_a_product){
                         $this->addFlash('danger', "Attention, des produits n'ont pas pu être ajoutés à votre commande!");
                   } else {
@@ -90,13 +97,12 @@ class CommandeController extends Controller
                   $this->addFlash('danger', "La commande a échouée.");
                   return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
               }
-          }
-          $this->addFlash('danger', "La commande a échouée: votre panier est vide");
-          return $this->redirect($this->generateUrl('sil16_vitrine_accueil'));
+            }
         }
 
     // Détail d'une commande
     public function showAction($commande_id){
+      // Vérification qu'un client est authentifié.
       if (!$this->get('security.authorization_checker')->isGranted('ROLE_CUSTOMER')) {
         $message = 'Vous devez être connecté pour accéder à cette page';
         return $this->redirectToRoute('render_with_access_denied_errors', array('message' => $message, 'route' => 'login'));
@@ -109,6 +115,8 @@ class CommandeController extends Controller
         return $this->redirect($this->generateUrl('sil16_vitrine_basket_index'));
       }
     }
+
+    // METHODES PRIVEES
 
     // Récupérer un produit dans la base de donnée
     private function findProduct($product_id){
@@ -126,6 +134,7 @@ class CommandeController extends Controller
     // Récupérer une commande dans la base de données
     private function findCommande($commande_id){
       $commande_manager = $this->getDoctrine()->getManager()->getRepository('sil16VitrineBundle:Commande');
+      // on récupère la commande dans la base
       if($commande_id){
         $commande = $commande_manager->find($commande_id);
       }
@@ -135,6 +144,7 @@ class CommandeController extends Controller
       } else {
         $current_customer = $this->getUser();
         $commande->getCustomer()->getId();
+        // On vérifie que la commande trouvée appartient bien au client authentifié.
         if($current_customer == $commande->getCustomer()){
           return $commande;
         } else {

@@ -1,6 +1,6 @@
 render_with_access_denied_errors:
   path: /render/{message}/{route}
-  defaults: { _controller: sil16VitrineBundle:Default:renderWithAccessDeniedErrors, message: "Vous n'êtes pas autorisé à accéder à cette page", route: 'sil16_vitrine_accueil' }
+  defaults: { _controller: sil16VitrineBundle:Security:renderWithAccessDeniedErrors, message: "Vous n'êtes pas autorisé à accéder à cette page", route: 'sil16_vitrine_accueil' }
 
 # STATIC PAGES
 sil16_vitrine_accueil:
